@@ -6,7 +6,7 @@ session_start();
 <head>
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
     <link rel="stylesheet" href="css/cart.css">
-    <link rel="stylesheet" href="font/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="font/bootstrap-icons.css">
 	<title>CART</title>
 </head>
 <body>
