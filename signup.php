@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>LOG IN</title>
+	<title>SIGN UP</title>
 	 <link rel="stylesheet" href="css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/signup.css">
     <link rel="stylesheet" href="font/bootstrap-icons.css">
 </head>
 <body>
 	<?php  include "custnav.php" ?>
 
-<div class="login">
+<div class="signup">
+
+  <?php 
+  if (isset($_GET['error'])) {
+    switch ($_GET['error']) {
+      case 1:
+        echo "<p class='text-danger' align='center'>Connecttion Failed</p>";
+        break;
+      case 2:
+        echo "<p class='text-danger' align='center'>Passwords doesn't match</p>";
+        break;
+      default:
+        echo "";
+        break;
+    }
+  }
+  ?>
 
 	 <div class="intro-details">
 
@@ -33,11 +49,10 @@
                        <h1> <i class="bi bi-person-circle"></i></h1>
                       </div>
 
-                      <form action="login_connect.php" method="POST">
-                              <div class="field">
+                      <form action="includes/signup_connect.php" method="POST">
+                            <div class="field">
                               <span class="bi bi-envelope"></span>
-                              <input type="text" name="email" required="" placeholder="Email">
-                              
+                              <input type="text" name="email" required="" placeholder="Email">               
                             </div>
                             <div class="field">
                               <span class="bi bi-lock"></span>
@@ -45,19 +60,14 @@
                             </div>
                              <div class="field">
                               <span class="bi bi-lock"></span>
-                              <input type="password" name="password" required="" placeholder="Confirm Password">
+                              <input type="password" name="confirmpass" required="" placeholder="Confirm Password">
                             </div>
-                            <button type="submit" class="lgnbtn" name="submit">Sign Up</button>
-                            <div class="createaccount"><a href="login.php" >Log In</a> </div>
+                            <button type="submit" class="signupbtn" name="signupbtn">Create Account</button>
+                            <div class="login"><a href="login.php" >Log In</a> </div>
                       </form>
                    </div>
 
-                </div>
-
-
-                 
-                
-
+                </div>           
         </div>
 
     </div>
