@@ -1,0 +1,17 @@
+
+.text-danger{
+	width: 500px;
+	background: #F2DEDE;
+	border-radius: 25px;
+	height: 25px;
+}
+.text-success{
+	width: 500px;
+	background: #bcf7cc;
+	border-radius: 25px;
+	height: 25px;
+}
+
+#content{
+	margin-top:130px;
+}
