@@ -53,28 +53,34 @@ if (isset($_POST['save'])) {
 					}
 					foreach ($arr2 as $key => $val) {
 					
-					$stmt3 = $conn->prepare( "INSERT INTO price(price_amt, item_id) 
-	 				VALUES (?,?);");
-					$stmt3->bind_param("ss" ,$item_price, $val['item_id']);
-					$stmt3->execute();
-					$stmt3->close();
+					$stmt3 = "INSERT INTO price(price_amt, item_id) 
+	 				VALUES ('$item_price', '{$val['item_id']}');";
+					
+					if (mysqli_query($conn, $stmt3)) {
+								$sql3= "UPDATE items i 
+								JOIN price p 
+								ON i.item_id=p.item_id  
+								SET i.price_id=p.price_id 
+								WHERE i.item_name='$item_name' and i.item_short_code='$item_sc';";
+
+									if ($conn->query($sql3) === TRUE) {
+									  header("Location:../products.php?error=3");
+									  exit();
+									} else {
+									  header("Location:../products.php?error=4");
+									  exit();
+									}
+
+									$conn->close();
+						
+					} 
+					else {
+						header("Location:../products.php?error=1");
+						exit();
+					}		
+
+					}
 				
-					}
-				$sql3= "UPDATE items i 
-				JOIN price p 
-				ON i.item_id=p.item_id  
-				SET i.price_id=p.price_id 
-				WHERE i.item_name='$item_name' and i.item_short_code='$item_sc';";
-
-					if ($conn->query($sql3) === TRUE) {
-					  header("Location:../products.php?error=3");
-					  exit();
-					} else {
-					  header("Location:../products.php?error=4");
-					  exit();
-					}
-
-					$conn->close();
 					
 				
 
