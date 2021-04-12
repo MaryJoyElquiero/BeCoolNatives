@@ -6,7 +6,7 @@ session_start();
 <head>
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
     <link rel="stylesheet" href="css/myorders.css">
-    <link rel="stylesheet" href="font/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="font/bootstrap-icons.css">
 	<title>MYORDERS</title>
 </head>
 <body>
