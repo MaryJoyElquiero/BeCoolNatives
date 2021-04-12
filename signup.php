@@ -4,7 +4,7 @@
 	<title>LOG IN</title>
 	 <link rel="stylesheet" href="css/bootstrap.min.css"> 
     <link rel="stylesheet" href="css/login.css">
-    <link rel="stylesheet" href="font/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="font/bootstrap-icons.css">
 </head>
 <body>
 	<?php  include "custnav.php" ?>
