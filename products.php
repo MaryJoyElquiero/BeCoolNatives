@@ -3,7 +3,7 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css"> 
     <link rel="stylesheet" href="css/products.css">
-    <link rel="stylesheet" href="font/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="font/bootstrap-icons.css">
     <title>Products</title>
 </head>
 <body>
