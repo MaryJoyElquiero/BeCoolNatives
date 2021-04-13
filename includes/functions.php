@@ -1,18 +1,21 @@
 <?php  
 
-function createUser($conn, $acc_id, $email, $password){
+function createUser($conn, $email, $password){
 	$err;
-	$sql="INSERT INTO accounts(acc_id,email,password) VALUES (?,?,?);";
+	$sql="INSERT INTO accounts(email,password) VALUES (?,?);";
 
 	$stmt= mysqli_stmt_init($conn);
 		if (!mysqli_stmt_prepare($stmt, $sql)) {
 				header("Location:../login.php?error=connectionfailed");
+				$err=false;
+				return $err;
 				exit();
 			}
-
-			mysqli_stmt_bind_param($stmt,"sss", $acc_id, $email, $password);
+			mysqli_stmt_bind_param($stmt,"ss", $email, $password);
 			mysqli_stmt_execute($stmt);
 			mysqli_stmt_close($stmt);
+			$err= true;
+			return $err;
 
 }
 
