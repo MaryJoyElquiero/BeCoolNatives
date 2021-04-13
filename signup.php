@@ -15,10 +15,13 @@
   if (isset($_GET['error'])) {
     switch ($_GET['error']) {
       case 1:
-        echo "<p class='text-danger' align='center'>Connecttion Failed</p>";
+        echo "<p class='text-danger' align='center'>Connection Failed</p>";
         break;
       case 2:
         echo "<p class='text-danger' align='center'>Passwords doesn't match</p>";
+        break;
+      case 3:
+        echo "<p class='text-danger' align='center'>Sign Up first</p>";
         break;
       default:
         echo "";
