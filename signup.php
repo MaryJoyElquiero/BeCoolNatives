@@ -23,6 +23,9 @@
       case 3:
         echo "<p class='text-danger' align='center'>Sign Up first</p>";
         break;
+      case 4:
+        echo "<p class='text-danger' align='center'>Failed to Create Account</p>";
+        break;
       default:
         echo "";
         break;
