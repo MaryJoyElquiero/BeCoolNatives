@@ -25,49 +25,51 @@ session_start();
 <div class="orders">
 	<div class="row">
 		<div class="col-12" align="center">
-			<div class="my-md-2">
-				<p class="fs-3">Order Form</p>
-			</div>
 			
+				<p class="fs-3">Order Form</p>
+				
 		</div>
 	</div>
 	<form action="includes/placeorder.php" method="POST">
-	<div class="order-form">
+	<div class="order-box">
 		<div class="img-box">
 			<?php echo "<img src='items/".$item_img."'>"; ?>
 		</div>
-		<div class="label">
-			<p>Item Name:</p>
-			<p>Item Price:</p>
-			<p>Quantity:</p>
-			<p>Total Amount:</p>
+		<div class="order-form">
+				<div class="details">
+						<div class="label">
+							<p>Item Name:</p>
+							<p>Item Price:</p>
+							<p>Quantity:</p>
+							<p>Total Amount:</p>
+
+						</div>
+						<div class="itemdetails">
+							<p > <?php echo $item_name ?></p>
+							<p> P<?php echo $item_price ?></p>
+							<p > <?php echo $order_qty ?></p>
+							<p class="order_total">
+								P<?php echo $order_total ?>
+							</p>
+						</div>
+				</div>
+				<div class="placeorder">
+						<?php
+										echo "<input type='hidden' name='acc_id' value='". $acc_id. "'>";
+										echo "<input type='hidden' name='item_id' value='". $item_id. "'>";
+										echo "<input type='hidden' name='item_price' value='". $item_price. "'>";
+										echo "<input type='hidden' name='order_qty' value='". $order_qty."'>";
+										echo "<input type='hidden' name='order_total' value='". $order_total. "'>";
+										
+						?>
+					
+						<button class="btn btn-outline-danger" name="cancel"> Cancel</button>
+						<button class="btn btn-outline-danger" name="placeorder"> Place Order</button>
+				</div>
 
 		</div>
-		<div class="details">
-			<p > <?php echo $item_name ?></p>
-			<p> P<?php echo $item_price ?></p>
-			<p > <?php echo $order_qty ?></p>
-			<p class="order_total">
-				P<?php echo $order_total ?>
-			</p>
-			<div class="placeorder">
-				<?php
-								echo "<input type='hidden' name='acc_id' value='". $acc_id. "'>";
-								echo "<input type='hidden' name='item_id' value='". $item_id. "'>";
-								echo "<input type='hidden' name='item_price' value='". $item_price. "'>";
-								echo "<input type='hidden' name='order_qty' value='". $order_qty."'>";
-								echo "<input type='hidden' name='order_total' value='". $order_total. "'>";
-								
-				?>
-				
-				<button class="btn btn-outline-danger" name="cancel"> Cancel</button>
-				<button class="btn btn-outline-danger" name="placeorder"> Place Order</button>
-			</div>
-
 		</div>
 
-
-	</div>
 </form>
 
 <?php
