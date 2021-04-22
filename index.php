@@ -13,10 +13,38 @@ session_start();
 <body>
 
 <?php include "custnav.php" ?>
-
-
+<div class="container-fluid">
 <div class="items">
-	
+
+<div class="banner">
+	<div class="row">
+		<div class="col-5" align="left">
+
+				<div class="intro">
+					<div class="logo"><img src="img/logo2.png"></div>
+					<div class="intro-text">
+						<div class="text">Bicol Native Products. </div>
+						<div class="becool">
+							<div class="be">Shop and Be</div>
+							<div class="cool"> Cool!</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		<div class="col-7 search" align="right">
+			<form action="index.php" method="GET">
+			<div class="my-md-1">
+				<div class="input-group">
+					<input class="searchkey" type="text" name="searchkey" placeholder="Naghahanap ako ki...">
+					<button class="searchbtn" name="search"><i class="bi bi-search"></i></button>
+				</div>
+			</div>
+		</form>
+		</div>		
+</div>
+
+</div>		
 
 	<div class="categories">
 		<form method="POST" action="index.php" class="category">
@@ -65,6 +93,12 @@ session_start();
 			case 2:
 				echo "<p class='text-success' align='center'>Added to Cart</p>";
 				break;
+			case 3:
+				echo "<p class='text-success' align='center'>Profile Saved</p>";
+				break;
+			case 4:
+				echo "<p class='text-success' align='center'>Logged In</p>";
+				break;
 			
 			default:
 				echo "";
@@ -75,7 +109,7 @@ session_start();
 		include "includes/conn.php";
 	
 		if (isset($_POST['category'])) {
-		$category=$_POST['cat_desc'];
+		$category=htmlentities($_POST['cat_desc']);
 		$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name, p.price_amt, ct.cat_desc
 									FROM items i
 									JOIN category ct
@@ -85,6 +119,19 @@ session_start();
 									WHERE i.item_stat='Active'
 									AND ct.cat_desc='$category';";
 		}
+		elseif(isset($_GET['search'])) {
+			$searchkey=htmlentities($_GET['searchkey']);
+			$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name, p.price_amt, ct.cat_desc
+									FROM items i
+									JOIN category ct
+									ON ct.cat_id= i.cat_id
+									JOIN price p
+									ON i.item_id=p.item_id
+									WHERE i.item_stat='Active'
+									AND i.item_name LIKE '$searchkey%';
+									";
+		}
+
 		elseif(isset($_POST['categoryAll'])) {
 			$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name, p.price_amt, ct.cat_desc
 									FROM items i
@@ -129,11 +176,11 @@ session_start();
 						echo "<img src='items/".$val['item_img']."' >";
 						echo "<div class='details'>";
 						echo "<p>".$val['item_name']."</p>";
-						echo "<div class='price'>P".$val['price_amt']."</div>";
+						echo "<div class='price'>Php".number_format($val['price_amt'],2)."</div>";
 						?>
 
 						<div class="itemqty">
-							<input type="text" name="item_qty" placeholder="set quantity" required="">
+							<input type="number" name="item_qty" placeholder="set quantity" required="">
 						</div>
 						<div class="actions">
 						<button name="addtocartbtn" type="submit">
@@ -153,7 +200,7 @@ session_start();
 </div>
 
 
-
+</div>
 
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
@@ -164,5 +211,7 @@ session_start();
 </script>
 </body>
 </html>
+
+
 
 
