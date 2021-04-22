@@ -21,7 +21,4 @@ $acc_id=htmlentities($_POST['acc_id']);
 }
 
 
-
-
-
 ?>
