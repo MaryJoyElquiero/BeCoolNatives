@@ -13,7 +13,7 @@ if (isset($_POST['signupbtn'])) {
 			$_SESSION['password']= $password;
 			$_SESSION['email']= $email;
 
-			header("Location:../profile.php");
+			header("Location:../profile.php?");
 			exit();
 
 		}
