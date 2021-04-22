@@ -69,25 +69,6 @@
 </div> 
 
 
-<!--Delete Modal-->
-<div class="modal fade" id="deletemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-      	<form action="includes/deleteItem.php" method="POST">
-      		<input type="hidden" name="delete_id">
-      		<h3>Delete Item?</h3>
-      </div>
-    
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-        <button type="submit" class="btn btn-outline-danger" name="delete"> Delete</button>
-      </div>
-  </form>
-    </div>
-  </div>
-</div> 
-
 <?php include "sellernav.php"; ?>
 
 
@@ -198,15 +179,19 @@
 
  				if (!empty($arr)) {
 			    foreach ($arr as $key => $value) {
-			   
+			 
 				echo "<tr>";
 				echo "<td>". $value['item_name'] ."</td>";
 				echo "<td>". $value['item_short_code'] ."</td>";
 				echo "<td>P". $value['price_amt'] ."</td>";
 				echo "<td>". $value['cat_desc'] ."</td>";
 				echo "<td>". $value['item_stat'] ."</td>";
-				echo "<td> 	<button type='button' class='btn btn-outline-success'> Edit </button></td>";
-				echo "<td>  <button type='button' class='btn btn-outline-danger' data-bs-toggle='modal' data-bs-target='#deletemodal'> Delete </button></td>";
+				
+				echo "<td> 	<button type='button' class='btn btn-outline-success' name='edit'> Edit </button></td>";
+				  echo "<form action='includes/deleteItem.php' method='POST'>";
+				  echo "<input type='hidden' name='item_id' value='". $value['item_id']."'>";
+				echo "<td><button type='submit' class='btn btn-outline-danger' name='delete'> Delete </button></td>";
+				echo "</form>";
 				echo "</tr>";
 			    }
 			    echo "<tr>";
@@ -246,38 +231,6 @@
 <script src="js/custom.js"></script>
 
 
-<script>
-	$(document).ready (
-
-
-
-		function() {
-			$('.btn.btn-outline-danger').on('click', 
-
-
-				function(){
-
-				$('#deletemodal').modal('show');
-
-				$tr = $(this).closest('tr');
-
-				var data = $tr.children("td").map(function(){
-					return $(this).text();
-
-				}).get();
-
-				console.log(data);
-				$('#delete_id').val(data[0]);
-
-			}
-
-			);
-
-	}
-
-
-	);
-</script>
 
 
 <script>
