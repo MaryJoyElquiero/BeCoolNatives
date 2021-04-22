@@ -20,7 +20,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
  ?>
 
 <?php include "custnav.php" ?>
-<div class="container-fluid">
+<div class="container">
 <div class="orders">
 	<div class="row">
 		<div class="col-md-7 col-12" align="left">
@@ -30,21 +30,21 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 			
 		</div>
 		<div class="col-md-5 col-12" align="right">
+			<form action="myorders.php" method="GET">
 			<div class="my-md-2">
 				<div class="input-group">
-					<input class="form-control" type="text" name="search" placeholder="Search Orders">
-					<button class="btn btn-outline-dark"><i class="bi bi-search"></i></button>
+					<input class="searchkey" type="text" name="searchkey" placeholder="Search Orders">
+					<button class="searchbtn" name="search"><i class="bi bi-search"></i></button>
 				</div>
 			</div>
-		</div>
-	
-	
+		</form>
+		</div>	
 	</div>
 
 
 <ul class="nav nav-pills nav-fill">
   <li class="nav-item">
-    <a class="nav-link active"  style="background-color:#30f2e8;" aria-current="page" href="myorders.php">All</a>
+    <a class="nav-link active"  style="background-color:#29a3a3;" aria-current="page" href="myorders.php">All</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="topay.php"> To Pay </a>
@@ -61,8 +61,216 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
  
 </ul>
 
+
+
+
+<?php 
+
+include "includes/conn.php";
+
+if (isset($_GET['search'])) {
+	$searchkey=$_GET['searchkey'];
+
+	 $sql="SELECT o.order_date
+					 	FROM orders o
+					 	JOIN items i
+					 	on i.item_id= o.item_id
+					 	JOIN accounts ac
+					 	ON o.acc_id= ac.acc_id
+					 	WHERE ac.email='{$_SESSION['email']}'
+						AND ac.password='{$_SESSION['password']}'
+						AND i.item_name LIKE '$searchkey%'
+					 	GROUP BY o.order_date
+					 	ORDER BY o.order_date
+					 	DESC;";
+
+
+}
+else{
+
+		$sql="SELECT o.order_date
+					 	FROM orders o
+					 	JOIN items i
+					 	on i.item_id= o.item_id
+					 	JOIN accounts ac
+					 	ON o.acc_id= ac.acc_id
+					 	WHERE ac.email='{$_SESSION['email']}'
+						AND ac.password='{$_SESSION['password']}'
+					 	GROUP BY o.order_date
+					 	ORDER BY o.order_date
+					 	DESC;";
+
+}
+					$stmt= mysqli_stmt_init($conn);
+					if(!mysqli_stmt_prepare($stmt,$sql)) {
+					header("Location: myorders.php?error= Connection Failed");
+					exit();
+
+					}
+					mysqli_stmt_execute($stmt);
+					$result=mysqli_Stmt_get_result($stmt);
+					$arr= array();
+					while ($row=mysqli_fetch_assoc($result)) {
+					array_push($arr, $row);
+					}
+					if (empty($arr)) {
+						echo "<div class='empty'>";
+						echo "<p> <i class='bi bi-bag-x'></i>  It's Empty Here </p>";
+						echo "</div>";
+					}
+					foreach ($arr as $key => $val) {
+						$order_date = $val['order_date'];
+
+if (isset($_GET['search'])) {
+	$searchkey=$_GET['searchkey'];
+
+
+						$sql2="SELECT sh.shop_name
+					 	FROM shop sh
+					 	JOIN items i
+					 	on i.shop_id= sh.shop_id
+					 	JOIN orders o
+					 	on o.item_id= i.item_id
+					 	JOIN accounts ac
+					 	ON o.acc_id= ac.acc_id
+					 	WHERE ac.email='{$_SESSION['email']}'
+						AND ac.password='{$_SESSION['password']}'
+						AND o.order_date='$order_date'
+						AND i.item_name LIKE '$searchkey%'
+					 	GROUP BY sh.shop_name;";
+}
+else{
+
+						$sql2="SELECT sh.shop_name
+					 	FROM shop sh
+					 	JOIN items i
+					 	on i.shop_id= sh.shop_id
+					 	JOIN orders o
+					 	on o.item_id= i.item_id
+					 	JOIN accounts ac
+					 	ON o.acc_id= ac.acc_id
+					 	WHERE ac.email='{$_SESSION['email']}'
+						AND ac.password='{$_SESSION['password']}'
+						AND o.order_date='$order_date'
+					 	GROUP BY sh.shop_name;";
+}
+					 	$stmt2= mysqli_stmt_init($conn);
+						if(!mysqli_stmt_prepare($stmt2,$sql2)) {
+						header("Location: myorders.php?error= Connection Failed");
+						exit();
+
+						}
+					mysqli_stmt_execute($stmt2);
+					$result=mysqli_Stmt_get_result($stmt2);
+					$arr2= array();
+					while ($row2=mysqli_fetch_assoc($result)) {
+					array_push($arr2, $row2);
+					}
+					foreach ($arr2 as $key => $val) {
+						$shop = $val['shop_name'];
+
+
+	?>
+
+<div class="order-items">	
+		<div class="shop_name">
+			<p><i class="bi bi-shop"></i>  <?php echo $shop; ?></p>
+		</div>	
+		<hr>	
+
+		<?php 
+if (isset($_GET['search'])) {
+	$searchkey=$_GET['searchkey'];
+	$sql= "SELECT i.item_img, i.item_name, o.item_price, o.order_qty,o.order_total,o.order_date, o.order_status,o.billing_info
+								FROM orders o
+								 JOIN items i
+							 	 ON o.item_id= i.item_id
+							  	JOIN shop sh
+								  ON i.shop_id= sh.shop_id
+								JOIN accounts ac
+								  ON ac.acc_id=o.acc_id
+							 	 WHERE sh.shop_name = '$shop'
+							 	 AND o.order_date='$order_date'
+							 	 AND ac.email='{$_SESSION['email']}'
+							 	 AND i.item_name LIKE '$searchkey%'
+							 	 AND ac.password='{$_SESSION['password']}';";
+
+}
+else{
+		$sql= "SELECT i.item_img, i.item_name, o.item_price, o.order_qty,o.order_total,o.order_date, o.order_status,o.billing_info
+								FROM orders o
+								 JOIN items i
+							 	 ON o.item_id= i.item_id
+							  	JOIN shop sh
+								  ON i.shop_id= sh.shop_id
+								JOIN accounts ac
+								  ON ac.acc_id=o.acc_id
+							 	 WHERE sh.shop_name = '$shop'
+							 	 AND o.order_date='$order_date'
+							 	 AND ac.email='{$_SESSION['email']}'
+							 	 AND ac.password='{$_SESSION['password']}';";
+}
+							  	$stmt= mysqli_stmt_init($conn);
+								if(!mysqli_stmt_prepare($stmt,$sql)) {
+								header("Location: myorders.php?error= Connection Failed");
+								exit();
+
+								}
+					mysqli_stmt_execute($stmt);
+					$result=mysqli_Stmt_get_result($stmt);
+					$arr= array();
+					while ($row=mysqli_fetch_assoc($result)) {
+					array_push($arr, $row);
+					}
+					foreach ($arr as $key => $value) {
+
+
+		?>
+
+	<div class="row items">
+		<div class="col-2">
+			<div class="img-box">
+				<?php echo "<img src='items/" . $value['item_img']."'>" ; ?>
+			</div>
+		</div>
+		<div class="col-5">
+			<div class="details">
+				
+				<p class="label"> Placed Order: <?php  echo $value['order_date'];?></p>
+				<p class="itemname"> <?php  echo $value['item_name'];?></p>
+				<p>P <?php  echo number_format($value['item_price'],2).  " x " .$value['order_qty'];?></p>
+				<p> <?php  echo $value['billing_info'];?></p>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="order_total">
+				
+				<p class="label"> Total: </p>
+				<p class="order_total"> P <?php  echo number_format($value['order_total'],2);?></p>
+				<p> <?php  echo $value['order_status'];?></p>
+				<button class="btn btn-outline-danger" name="cancel"> Cancel Order</button>
+			</div>
+		</div>
+
+	</div>
+	
+	
+
+<hr>
+<?php } ?>
+</div>
+
+<?php 
+
+
+}
+}
+
+?>
 </div>
 </div>
+
+
 
 
 <script src="js/bootstrap.min.js"></script>
@@ -70,5 +278,6 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 <script src="js/custom.js"></script>
 </body>
 </html>
+
 
 
