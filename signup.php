@@ -8,7 +8,7 @@
 </head>
 <body>
 	<?php  include "custnav.php" ?>
-
+<div class="container-fluid">
 <div class="signup">
 
   <?php 
@@ -24,7 +24,7 @@
         echo "<p class='text-danger' align='center'>Sign Up first</p>";
         break;
       case 4:
-        echo "<p class='text-danger' align='center'>Failed to Create Account</p>";
+        echo "<p class='text-danger' align='center'>Failed to create account</p>";
         break;
       default:
         echo "";
@@ -77,7 +77,7 @@
         </div>
 
     </div>
-
+</div>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/custom.js"></script>
