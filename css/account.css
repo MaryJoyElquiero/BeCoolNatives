@@ -1,0 +1,99 @@
+body{
+background-color: #f7f7f7;
+}
+.account{
+
+	margin-top: 100px;
+	margin-left: 150px;
+
+}
+.acc-header{
+	display: inline-flex;
+	background-color: white;
+	height: 160px;
+	width: 800px;
+
+}
+.accountname{
+	margin-top: 30px;	
+}
+.accountname .name{
+	font-size: 30px;
+	color: #6697A7;
+}
+.bi-person-circle{
+	font-size: 90px;
+	margin-right: 20px;
+	margin-left: 20px;
+	color: #6697A7;
+}
+
+.editprofile{
+	height: 50px;
+}
+.editprofile button{
+	border-style: solid;
+	border-color: #6697A7;
+	background-color: white;
+	border-radius: 25px;
+	color: #6697A7;
+	height: 40px;
+	width: 100px;
+	margin-top: 5px;
+}
+.editprofile button:hover{
+		
+	background-color: #6697A7;;	
+	color: white;
+	font-weight: 500;
+}
+.acc-info{
+	display: inline-flex;
+	background: white;
+	width: 800px;
+	margin-top: 10px;
+	height: 70px;
+}
+.editadd button{
+	border-style: solid;
+	border-color: #6697A7;
+	background-color: white;
+	border-radius: 25px;
+	color: #6697A7;
+	height: 40px;
+	margin-top: 5px;
+}
+.editadd button:hover{
+	
+	background-color: #6697A7;;	
+	color: white;
+	font-weight: 500;
+
+}
+.icon{
+	font-size: 40px;
+	color: #6697A7;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+.acc-info .info{
+	width: 570px;
+	margin-top: 10px;
+}
+.info .label{
+	font-size: 16px;
+}
+.info .text{
+	font-size: 20px;
+	font-weight: 500;
+	margin-left: 10px;
+
+}
+.text input{
+	height: 40px;
+}
+.acc-info .editadd{
+	margin-top: 10px;
+}
+
+
