@@ -2,9 +2,8 @@ body{
 
 		background-color: #f7f7f7;
 }
-
 .items{
-		margin-top:150px;
+		margin-top:90px;
 		margin-left: 30px;
 		margin-right: 30px;
 }
@@ -23,25 +22,29 @@ body{
 .category button{
   background-color: white;
   width: 100%;
-  border: none;
-  color: black;
+  border-style: solid;
+  border-color: #6697A7;
+  color: #6697A7;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
-  background-color: #f5feff;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.25);
+  border-radius: 25px;
+ 
 }
 
 .category button:hover{
-	box-shadow: 0 5px 10px rgba(0,0,0,0.25);
-	 background-color: #30f2e8;
+
+	background-color: #6697A7;;	
+	color: white;
+	font-weight: 500;
   
 }
 
 .items .content{
 	position: relative;
-	margin-left: 1%;
+	margin-left: 5px;
+	margin-right: 15px;
 	display: inline-flex;
 	width: 180pt;
 	height: 200pt;
@@ -96,8 +99,9 @@ body{
 	top: 10px;
 	right: 30px;
 	font-size: 16px;
+	font-weight: 500;
 	color: #6697A7;
-	background-color: white;
+	background-color:#f5feff;
 }
 
 .itemqty{
@@ -120,14 +124,94 @@ body{
 	height: 30pt;
 	position: relative;
 	margin: 0;
-	background-color: #30f2e8;
-    border: 1px solid #52afb3;
-    color: black;
+	background-color: #29a3a3;
+    border: 1px solid #1d8080;
+    color: white;
+    font-weight: 500;
     text-align: center;
     text-decoration: none;
     font-size: 16px;
 }
 .actions button:hover{
-	background-color: #2aebe1;
+	background-color:#1d8080;
 	font-weight: 500;
+}
+.search{
+	align-self: center;
+}
+.search .searchbtn{
+	background-color:white;
+	color: #29a3a3;
+	height: 40px;
+	width: 40px;
+	border-style: solid;
+	border-color: #29a3a3;
+	margin-right: 20px;
+	font-weight: 500px;
+	border-radius: 0;
+}
+
+.searchkey{
+	height: 40px;
+	width: 650px;
+	border-radius: 0;
+	border-style: solid;
+	border-color: #29a3a3;
+	
+}
+
+.intro{
+	display: inline-flex;
+	font-size: 20px;
+	font-weight: 500;
+	margin-left: 10px;
+	margin-top: 0;
+	width: 500px;
+	
+}
+.intro .intro-text{
+	margin-top: 20px;
+	color: black;
+}
+.intro-text .becool{
+	display: inline-flex;
+	font-weight: 600px;
+}
+.becool .cool{
+	color:#29a3a3; 
+}
+.intro .logo{
+	height: 100px;
+	width: 100px;
+}
+.logo img{
+	height: 100%;
+	width: 100%;
+}
+
+.banner{
+	background-color: white;
+	
+}
+.search{
+	margin-top: 10px;
+}
+.text-success{
+  	width: 500px;
+	background: #bcf7cc;
+	border-radius: 25px;
+	height: 25px;
+	margin-left: 400px;
+	margin-top: 10px;
+	text-align: center;
+}
+.text-danger{
+	width: 500px;
+	background: #F2DEDE;
+	border-radius: 25px;
+	height: 25px;
+	margin-top: 10px;
+	margin-left: 400px;
+	margin-top: 10px;
+	text-align: center;
 }
