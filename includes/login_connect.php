@@ -12,7 +12,9 @@ if(isset($_POST['submit'])){
 		session_start();
 		$_SESSION['password']= $password;
 		$_SESSION['email']= $email;
-		header("Location:../index.php?loginsuccess");
+
+
+		header("Location:../index.php?error=4");
 		exit();
 	}
 	else{
