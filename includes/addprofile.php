@@ -23,9 +23,10 @@ if (isset($_SESSION['email']) || isset($_SESSION['password'])) {
 					mysqli_stmt_execute($stmt);
 					$result=mysqli_Stmt_get_result($stmt);
 					$arr= array();
-					while ($row=mysqli_fetch_assoc($result)) {
+					while($row=mysqli_fetch_assoc($result)) {
 						array_push($arr, $row);
 					}
+
 					foreach ($arr as $key => $val){
 
 						$sql1 = "INSERT INTO accinfo (acc_cn, acc_age, acc_gender, acc_contact, province, city, brgy, add_details, account_id)
