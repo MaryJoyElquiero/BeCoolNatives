@@ -1,0 +1,139 @@
+body{
+background-color: #f7f7f7;
+}
+.account{
+
+	margin-top: 90px;
+	margin-left: 280px;
+
+}
+
+.acc-info{
+	display: inline-flex;
+	background: white;
+	width: 600px;
+	margin-top: 10px;
+	height: 90px;
+}
+.add-info{
+	display: inline-flex;
+	background: white;
+	width: 600px;
+	margin-top: 10px;
+	height: 130px;
+}
+.header{
+	background: white;
+	width: 600px;
+	margin-top: 10px;
+	height: 50px;
+}
+.header .info{
+	margin-top: 10px;
+	margin-left: 20px;
+}
+
+
+.icon{
+	font-size: 40px;
+	color: #6697A7;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+.acc-info .info{
+	width: 570px;
+	margin-top: 10px;
+}
+
+.info .label{
+	font-size: 16px;
+}
+.info .text{
+	font-size: 20px;
+	font-weight: 500;
+
+}
+.info .address{
+	font-size: 20px;
+	font-weight: 500;
+	margin-right: 10px;
+}
+.text input{
+
+	width: 450px; 
+	height: 40px;
+	outline: none;
+	border: none;
+	background:#ebfafa;
+}
+.text select{
+
+	width: 450px; 
+	height: 40px;
+	outline: none;
+	border: none;
+	background:#ebfafa;
+}
+.address input{
+	display: inline-flex;
+	width: 220px; 
+	height: 40px;
+	outline: none;
+	border: none;
+	background:#ebfafa;
+	margin-right: 5px;
+	margin-top: 5px;
+}
+
+
+.acc-info .editadd{
+	margin-top: 10px;
+
+}
+.savebtn{
+	background: white;
+	width: 600px;
+	margin-top: 5px;
+	height: 60px;
+}
+
+.savebtn .info{
+	width: 570px;
+	margin-top: 10px;
+}
+.info button{
+	background-color: #29a3a3;
+	border-radius: 25px;
+	width: 200px;
+    border: none;
+    color: white;
+    font-weight: 500;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    margin-left: 200px;
+}
+.info button:hover{
+	background-color: #29a3a9;
+	box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+	
+}
+.text-success{
+  	width: 500px;
+	background: #bcf7cc;
+	border-radius: 25px;
+	height: 25px;
+	margin-left: 20px;
+	margin-top: 10px;
+	text-align: center;
+}
+.text-danger{
+	width: 500px;
+	background: #F2DEDE;
+	border-radius: 25px;
+	height: 25px;
+	margin-top: 10px;
+	margin-left: 20px;
+	margin-top: 10px;
+	text-align: center;
+}
