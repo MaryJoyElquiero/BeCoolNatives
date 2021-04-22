@@ -8,7 +8,7 @@
 </head>
 <body>
 	<?php  include "custnav.php" ?>
-
+<div class="container-fluid">
 <div class="login">
 
 <?php 
@@ -77,7 +77,7 @@
         </div>
 
     </div>
-
+</div>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/custom.js"></script>
