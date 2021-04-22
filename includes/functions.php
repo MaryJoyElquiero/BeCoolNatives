@@ -30,10 +30,8 @@ function uidExists($conn, $email, $password){
 			mysqli_stmt_execute($stmt);
 			$result= mysqli_stmt_get_result($stmt);
 
-
-			if ($row=mysqli_fetch_assoc($result)) {
+			if($row=mysqli_fetch_assoc($result)) {	
 				return $row;
-
 			}
 			else{
 				$err= false;
