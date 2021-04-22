@@ -1,26 +1,27 @@
 <?php 
 
 
-include_once "conn.php";
-
 if (isset($_POST['delete'])) {
 
-	$sql = "DELETE FROM items WHERE id ='$id';";
+include_once "conn.php";
+
+	$item_id=htmlentities($_POST['item_id']);
+
+	$sql = "DELETE FROM items WHERE item_id ='$item_id';";
+
+		if (mysqli_query($conn, $sql)) {	
+					header("Location:../products.php?error=6");
+						exit();
+					} 
+					else {
+						header("Location:../products.php?error=5");
+						exit();
+					}		
 
 
-	if ($conn->query($sql) === TRUE) {
-		header("Location:../upload.php?error=6");
-	}
-
-	else{
-		header("Location:../upload.php?error=5");
-		
-		}
-	}
 
 
-
-
+}
 
 
  ?>
