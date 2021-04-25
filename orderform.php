@@ -10,17 +10,7 @@ session_start();
 	<title>ORDER FORM</title>
 </head>
 <body>
-<?php 
-	if (isset($_POST['buy'])) {
-		 include "custnav.php";
-		$acc_id=htmlentities($_POST['acc_id']);
-		$item_id=htmlentities($_POST['item_id']);
-		$item_img=htmlentities($_POST['item_img']);
-		$item_name=htmlentities($_POST['item_name']);
-		$item_price=htmlentities($_POST['item_price']);
-		$order_qty=htmlentities($_POST['order_qty']);
-		$order_total=htmlentities($_POST['order_total']);
-			?>
+	<?php include "custnav.php";?>
 <div class="container-fluid">
 <div class="orders">
 	<div class="row">
@@ -30,57 +20,118 @@ session_start();
 				
 		</div>
 	</div>
-	<form action="includes/placeorder.php" method="POST">
-	<div class="order-box">
-		<div class="img-box">
-			<?php echo "<img src='items/".$item_img."'>"; ?>
-		</div>
-		<div class="order-form">
-				<div class="details">
-						<div class="label">
-							<p>Item Name:</p>
-							<p>Item Price:</p>
-							<p>Quantity:</p>
-							<p>Total Amount:</p>
 
-						</div>
+<?php 
+
+			include_once "includes/conn.php";
+
+		if (isset($_GET['id'])) {
+			$item_id=$_GET['id'];
+		}
+		else{
+			header("Location:cart.php");
+			exit;
+		}
+
+			
+							$sql= "SELECT ac.acc_id, aci.acc_cn, c.item_id, i.item_img, i.item_name, p.price_amt, SUM(c.item_qty) as order_qty, SUM(c.total_amt) as order_total, aci.province, aci.city, aci.brgy, aci.add_details
+								FROM cart c
+								 JOIN items i
+							 	 ON c.item_id= i.item_id
+							 	 JOIN price p
+							 	 ON i.item_id=p.item_id
+								JOIN accounts ac
+								  ON ac.acc_id=c.acc_id
+								JOIN accinfo aci
+								ON c.acc_id= aci.acc_id
+								WHERE c.item_id='$item_id'
+							 	 AND ac.email='{$_SESSION['email']}'
+							 	 AND ac.password='{$_SESSION['password']}'
+							 	 GROUP BY i.item_name;";
+					
+
+					$stmt= mysqli_stmt_init($conn);
+					if(!mysqli_stmt_prepare($stmt,$sql)) {
+					header("Location: cart.php?error=1");
+					exit();
+
+					}
+					mysqli_stmt_execute($stmt);
+					$result=mysqli_Stmt_get_result($stmt);
+					$arr= array();
+					while ($row=mysqli_fetch_assoc($result)) {
+					array_push($arr, $row);
+					}
+					if (empty($arr)) {
+						header("Location:cart.php");
+						exit();
+					}
+
+					foreach ($arr as $key => $value) {
+
+
+?>
+	
+	<div class="order-box">
+		<div class="reciever">
+			<div class="label"> Reciever:</div>
+			 <div class="info">	<?php echo $value['acc_cn'];?> </div>
+
+		</div>
+
+		<div class="address">
+				<div class="reciever">
+					<div class="label"> Address :</div>
+					<div class="info"><?php echo $value['province'].", ". $value['city']. ", ". $value['brgy'].", " .$value['add_details']; ?></div>		
+				</div>
+				<div class="editadd">
+				    <?php echo "<a href='updateaddress.php?id=".$value['item_id']."'><button class='btn btn-outline-danger' name='editadd'>Change Address</button></a>";?>
+				</div>
+		</div>
+ <hr>
+		<div class="order-details">
+		<div class="img-box">
+		<?php echo "<img src ='items/" .$value['item_img']. "'>" ; ?>
+		</div>
+
+		
+		<div class="details">
 						<div class="itemdetails">
-							<p > <?php echo $item_name ?></p>
-							<p> P<?php echo $item_price ?></p>
-							<p > <?php echo $order_qty ?></p>
-							<p class="order_total">
-								P<?php echo $order_total ?>
+
+							<p class="item_name"><?php echo $value['item_name'];?></p>
+							<p>Php <?php echo number_format($value['price_amt'],2);?> x <?php echo $value['order_qty'];?></p>
+							<p class="order_total">= Php
+								<?php echo number_format($value['order_total'],2);?>
 							</p>
 						</div>
-				</div>
+		</div>
+
+		</div>
+		<form action="includes/placeorder.php" method="POST">
 				<div class="placeorder">
 						<?php
-										echo "<input type='hidden' name='acc_id' value='". $acc_id. "'>";
-										echo "<input type='hidden' name='item_id' value='". $item_id. "'>";
-										echo "<input type='hidden' name='item_price' value='". $item_price. "'>";
-										echo "<input type='hidden' name='order_qty' value='". $order_qty."'>";
-										echo "<input type='hidden' name='order_total' value='". $order_total. "'>";
+
+
+										echo "<input type='hidden' name='acc_id' value='". $value['acc_id']. "'>";
+										echo "<input type='hidden' name='item_id' value='". $value['item_id']. "'>";
+										echo "<input type='hidden' name='item_price' value='". $value['price_amt']. "'>";
+										echo "<input type='hidden' name='order_qty' value='". $value['order_qty']."'>";
+										echo "<input type='hidden' name='order_total' value='". $value['order_total']. "'>";
+										echo "<input type='hidden' name='billing_info' value='". $value['province']. ", ". $value['city'] ." ," .$value['brgy'] ." ," .$value['add_details']. "'>";
 										
 						?>
 					
 						<button class="btn btn-outline-danger" name="cancel"> Cancel</button>
 						<button class="btn btn-outline-danger" name="placeorder"> Place Order</button>
 				</div>
-
+		</form>
 		</div>
-		</div>
 
-</form>
 
-<?php
-}
-else{
-	header("Location:cart.php");
-	exit();
+
+<?php 
 }
 ?>
-
-
 </div>
 </div>
 
