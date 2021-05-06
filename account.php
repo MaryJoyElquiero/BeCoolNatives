@@ -62,7 +62,25 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 
 						<div class="editprofile">
 						 <a href="editprofile.php"><button> Edit Profile</button></a>	
-						 		
+						 
+						 	<?php  
+				  					$sql="SELECT count('1') FROM shop sh
+									JOIN accounts a
+									ON a.acc_id=sh.acc_id								
+									WHERE a.email='{$_SESSION['email']}'
+									AND a.password='{$_SESSION['password']}'
+				  					;";
+									$result=mysqli_query($conn,$sql);
+									$row=mysqli_fetch_array($result);
+									
+									if (count($row)==0) {										
+										echo "<a href='shopSetup.php'><button>Be a Seller</button></a>";
+									}
+									else{
+										echo "<a href='shopindex.php'><button>Go to Shop</button></a>";
+									}
+									
+				  				?>	
 						</div>
 
 
