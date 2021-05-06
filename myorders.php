@@ -58,6 +58,10 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
     <li class="nav-item">
     <a class="nav-link" href="completed.php"> Completed</a>
   </li>
+    <li class="nav-item">
+    <a class="nav-link" href="cancelled.php"> Cancelled</a>
+  </li>
+ 
  
 </ul>
 
@@ -248,7 +252,6 @@ else{
 				<p class="label"> Total: </p>
 				<p class="order_total"> P <?php  echo number_format($value['order_total'],2);?></p>
 				<p> <?php  echo $value['order_status'];?></p>
-				<button class="btn btn-outline-danger" name="cancel"> Cancel Order</button>
 			</div>
 		</div>
 
