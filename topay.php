@@ -58,6 +58,9 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
     <li class="nav-item">
     <a class="nav-link" href="completed.php"> Completed</a>
   </li>
+   <li class="nav-item">
+    <a class="nav-link" href="cancelled.php"> Cancelled</a>
+  </li>
  
 </ul>
 
@@ -186,7 +189,7 @@ else{
 		<?php 
 if (isset($_GET['search'])) {
 	$searchkey=$_GET['searchkey'];
-	$sql= "SELECT i.item_img, i.item_name, o.item_price, o.order_qty,o.order_total,o.order_date, o.order_status,o.billing_info
+	$sql= "SELECT o.order_id,i.item_img, i.item_name, o.item_price, o.order_qty,o.order_total,o.order_date, o.order_status,o.billing_info
 								FROM orders o
 								 JOIN items i
 							 	 ON o.item_id= i.item_id
@@ -203,7 +206,7 @@ if (isset($_GET['search'])) {
 
 }
 else{
-		$sql= "SELECT i.item_img, i.item_name, o.item_price, o.order_qty,o.order_total,o.order_date, o.order_status,o.billing_info
+		$sql= "SELECT o.order_id,i.item_img, i.item_name, o.item_price, o.order_qty,o.order_total,o.order_date, o.order_status,o.billing_info
 								FROM orders o
 								 JOIN items i
 							 	 ON o.item_id= i.item_id
@@ -255,7 +258,10 @@ else{
 				<p class="label"> Total: </p>
 				<p class="order_total"> Php <?php  echo number_format($value['order_total'],2);?></p>
 				<p> <?php  echo $value['order_status'];?></p>
+				<form action="includes/orderstatus.php" method="POST">
+				<input type="hidden" name="order_id" value="<?php  echo $value['order_id'];?>">
 				<button class="btn btn-outline-danger" name="cancel"> Cancel Order</button>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -289,5 +295,7 @@ else{
 <script src="js/custom.js"></script>
 </body>
 </html>
+
+
 
 
