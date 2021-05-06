@@ -30,10 +30,10 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 			
 		</div>
 		<div class="col-md-5 col-12" align="right">
-			<form action="torecieve.php" method="GET">
+			<form action="topay.php" method="GET">
 			<div class="my-md-2">
 				<div class="input-group">
-					<input class="form-control" type="text" name="searchkey" placeholder="Search To Recieve Orders">
+					<input class="form-control" type="text" name="searchkey" placeholder="Search To Pay Orders">
 					<button class="btn btn-outline-dark" name="search"><i class="bi bi-search"></i></button>
 				</div>
 			</div>
@@ -47,20 +47,22 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
     <a class="nav-link " href="myorders.php">All</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link " href="topay.php"> To Pay </a>
+    <a class="nav-link  active"  style="background-color:#29a3a3;" aria-current="page"  href="topay.php"> To Pay </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="toship.php"> To Ship </a>
   </li>
     <li class="nav-item">
-    <a class="nav-link active"  style="background-color:#29a3a3;" aria-current="page"   href="torecieve.php"> To Recieve</a>
+    <a class="nav-link" href="torecieve.php"> To Recieve</a>
   </li>
     <li class="nav-item">
     <a class="nav-link" href="completed.php"> Completed</a>
   </li>
+   <li class="nav-item">
+    <a class="nav-link" href="cancelled.php"> Cancelled</a>
+  </li>
  
 </ul>
-
 
 
 
@@ -79,8 +81,8 @@ if (isset($_GET['search'])) {
 					 	ON o.acc_id= ac.acc_id
 					 	WHERE ac.email='{$_SESSION['email']}'
 						AND ac.password='{$_SESSION['password']}'
-						AND i.item_name='$searchkey'
-						AND o.order_status='To Recieve'
+						AND i.item_name LIKE '$searchkey%'
+						AND o.order_status='To Pay'
 					 	GROUP BY o.order_date
 					 	ORDER BY o.order_date
 					 	DESC;";
@@ -97,7 +99,7 @@ else{
 					 	ON o.acc_id= ac.acc_id
 					 	WHERE ac.email='{$_SESSION['email']}'
 						AND ac.password='{$_SESSION['password']}'
-						AND o.order_status='To Recieve'
+						AND o.order_status='To Pay'
 					 	GROUP BY o.order_date
 					 	ORDER BY o.order_date
 					 	DESC;";
@@ -138,8 +140,8 @@ if (isset($_GET['search'])) {
 					 	WHERE ac.email='{$_SESSION['email']}'
 						AND ac.password='{$_SESSION['password']}'
 						AND o.order_date='$order_date'
-						AND i.item_name='$searchkey'
-						AND o.order_status='To Recieve'
+						AND i.item_name LIKE '$searchkey%'
+						AND o.order_status='To Pay'
 					 	GROUP BY sh.shop_name;";
 }
 else{
@@ -155,7 +157,7 @@ else{
 					 	WHERE ac.email='{$_SESSION['email']}'
 						AND ac.password='{$_SESSION['password']}'
 						AND o.order_date='$order_date'
-						AND o.order_status='To Recieve'
+						AND o.order_status='To Pay'
 					 	GROUP BY sh.shop_name;";
 }
 					 	$stmt2= mysqli_stmt_init($conn);
@@ -175,10 +177,11 @@ else{
 
 
 	?>
+
 <div class="order-items">
 	<div class="row">
 		<div class="col-12 shop_name">
-			<p><?php echo $shop; ?></p>
+			<p><i class="bi bi-shop"></i>  <?php echo $shop; ?></p>
 		</div>	
 	</div>
 	<hr>
@@ -186,7 +189,7 @@ else{
 		<?php 
 if (isset($_GET['search'])) {
 	$searchkey=$_GET['searchkey'];
-	$sql= "SELECT i.item_img, i.item_name, o.item_price, o.order_qty,o.order_total,o.order_date, o.order_status,o.billing_info
+	$sql= "SELECT o.order_id,i.item_img, i.item_name, o.item_price, o.order_qty,o.order_total,o.order_date, o.order_status,o.billing_info
 								FROM orders o
 								 JOIN items i
 							 	 ON o.item_id= i.item_id
@@ -197,13 +200,13 @@ if (isset($_GET['search'])) {
 							 	 WHERE sh.shop_name = '$shop'
 							 	 AND o.order_date='$order_date'
 							 	 AND ac.email='{$_SESSION['email']}'
-							 	 AND i.item_name='$searchkey'
-							 	 AND o.order_status='To Recieve'
+							 	 AND i.item_name LIKE '$searchkey%'
+							 	 AND o.order_status='To Pay'
 							 	 AND ac.password='{$_SESSION['password']}';";
 
 }
 else{
-		$sql= "SELECT i.item_img, i.item_name, o.item_price, o.order_qty,o.order_total,o.order_date, o.order_status,o.billing_info
+		$sql= "SELECT o.order_id,i.item_img, i.item_name, o.item_price, o.order_qty,o.order_total,o.order_date, o.order_status,o.billing_info
 								FROM orders o
 								 JOIN items i
 							 	 ON o.item_id= i.item_id
@@ -213,7 +216,7 @@ else{
 								  ON ac.acc_id=o.acc_id
 							 	 WHERE sh.shop_name = '$shop'
 							 	 AND o.order_date='$order_date'
-							 	 AND o.order_status='To Recieve'
+							 	 AND o.order_status='To Pay'
 							 	 AND ac.email='{$_SESSION['email']}'
 							 	 AND ac.password='{$_SESSION['password']}';";
 }
@@ -253,9 +256,12 @@ else{
 			<div class="order_total">
 				
 				<p class="label"> Total: </p>
-				<p class="order_total">Php <?php  echo number_format($value['order_total'],2);?></p>
+				<p class="order_total"> Php <?php  echo number_format($value['order_total'],2);?></p>
 				<p> <?php  echo $value['order_status'];?></p>
+				<form action="includes/orderstatus.php" method="POST">
+				<input type="hidden" name="order_id" value="<?php  echo $value['order_id'];?>">
 				<button class="btn btn-outline-danger" name="cancel"> Cancel Order</button>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -266,6 +272,7 @@ else{
 			</div>
 		</div>
 	</div>
+
 
 <hr>
 <?php } ?>
@@ -282,10 +289,12 @@ else{
 </div>
 
 
+
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/custom.js"></script>
 </body>
 </html>
+
 
 
