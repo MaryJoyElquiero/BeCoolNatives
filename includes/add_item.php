@@ -1,17 +1,27 @@
 <?php 
+session_start();
 if (isset($_POST['save'])) {
 	include_once "conn.php";
 
 	$item_img=$_FILES['item_img']['name'];
-	$item_name=htmlentities($_POST['item_name']);
+	
 	$item_sc=htmlentities($_POST['item_short_code']);
 	$item_price=htmlentities($_POST['item_price']);
 	$item_ct=htmlentities($_POST['item_category']);
 	$item_stat="Pending";
 
 	$target = "../items/" .basename($_FILES['item_img']['name']);
+	$imageFileType = strtolower(pathinfo($target,PATHINFO_EXTENSION));
+	$item_name=htmlentities($_POST['item_name']);
 
-	$sql_check="SELECT item_id FROM items WHERE item_name =? or item_short_code=?";
+	$sql_check="SELECT i.item_id FROM items i
+									JOIN shop sh
+									ON i.shop_id=sh.shop_id
+									JOIN accounts a
+									ON a.acc_id=sh.acc_id	
+									WHERE item_name =? or item_short_code=?							
+									AND a.email='{$_SESSION['email']}'
+									AND a.password='{$_SESSION['password']}'";
 	$stmt_chk=mysqli_stmt_init($conn);
 
 	if (!mysqli_stmt_prepare($stmt_chk,$sql_check)) {
@@ -31,17 +41,55 @@ if (isset($_POST['save'])) {
 	 	exit();
 	 }
 	 else {
-	 	$stmt = $conn->prepare( "INSERT INTO items(item_img, item_name, item_short_code,cat_id,item_stat) 
-	 	VALUES (?,?,?,?,?);");
-			$stmt->bind_param("sssss" ,$item_img , $item_name, $item_sc,$item_ct, $item_stat);
+
+
+
+	 	$check = getimagesize($_FILES['item_img']['tmp_name']);
+	  if($check == false) {
+
+	  	header("Location: ../products.php?error=9");
+		  exit();
+	    
+	  }
+
+
+		if($imageFileType !== "jpg" && $imageFileType !== "png" && $imageFileType !== "jpeg" ) {
+		  header("Location: ../products.php?error=10");
+		  exit();
+
+		}
+
+		if ($_FILES['item_img']['size'] > 500000) {
+		   header("Location: ../products.php?error=11");
+		  exit();
+
+		}
+
+	 		$sql="SELECT sh.shop_id FROM shop sh
+	 		JOIN accounts a
+	 		ON sh.acc_id=a.acc_id
+	 		 WHERE email='{$_SESSION['email']}' 
+			and password='{$_SESSION['password']}';";
+			$result = mysqli_query($conn, $sql); 
+			if (mysqli_num_rows($result)) { 
+	 		   while ($row = mysqli_fetch_assoc($result)) { 
+	        			$shop_id=$row['shop_id'];
+	   			 		}
+	 	
+					 } 
+
+	 	$stmt = $conn->prepare( "INSERT INTO items(item_img, item_name, item_short_code,cat_id,item_stat,shop_id) 
+	 	VALUES (?,?,?,?,?,?);");
+			$stmt->bind_param("ssssss" ,$item_img , $item_name, $item_sc,$item_ct, $item_stat,$shop_id);
 			$stmt->execute();
 			$stmt->close();
 
 			if (move_uploaded_file($_FILES['item_img']['tmp_name'], $target)) {
+
 				$sql2= "SELECT item_id FROM items WHERE item_name='$item_name' and item_short_code='$item_sc';";
 					$stmt2= mysqli_stmt_init($conn);
 					if(!mysqli_stmt_prepare($stmt2,$sql2)) {
-						header("Location:../index.php?error= Connection Failed");
+						header("Location:../products.php?error=4");
 						exit();
 
 					}
