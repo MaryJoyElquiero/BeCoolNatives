@@ -22,17 +22,17 @@
 				    </button>
 				    <div class="collapse navbar-collapse" id="navbarSupportedContent" >
 				      <ul class="navbar-nav mx-auto">
+				      	 <li class="nav-item">
+				          <a class="nav-link" href="seller_dashboard.php"><b><i class="bi bi-grid" style="font-size:26px; font-weight: 600; "></i> Dashboard</a></b>
+				        </li>
 				        <li class="nav-item">
-				          <a class="nav-link"  href="shopindex.php"><b><i class="bi bi-shop" style="font-size:26px; font-weight: 600; "></i> Shop </a></b>
+				          <a class="nav-link"  href="shopview.php"><b><i class="bi bi-shop" style="font-size:26px; font-weight: 600; "></i> Shop </a></b>
 				        </li>
 				        <li class="nav-item">
 				          <a class="nav-link" href="products.php"><b><i class="bi bi-card-list" style="font-size:26px; font-weight: 600; "></i> Products</a></b>
 				        </li>
 				        <li class="nav-item">
 				          <a class="nav-link" href="seller_topack.php"><b><i class="bi bi-handbag" style="font-size:26px; font-weight: 600; "></i>Orders</a></b>
-				        </li>
-				        <li class="nav-item">
-				          <a class="nav-link" href="report.php"><b><i class="bi bi-file-earmark-bar-graph" style="font-size:26px; font-weight: 600; "></i> Report</a></b>
 				        </li>
 				      </ul>
 				    </div>
@@ -41,56 +41,48 @@
 			
 		</div>
 		
-<?php 
-
-if (isset($_SESSION['password']) || isset($_SESSION['email'])) {
-
-?>
-		<div class="col-3" align="right">
-			<div class="my-md-3">
-				<a href="index.php"><button class="btn" style="
-	background-color: #29a3a3;
-	border-radius: 25px;
-	width: 130px;
-    border: none;
-    color: white;
-    font-weight: 500;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 16px;
-    margin-right: 20px;
-  ">Exit Shop</button></a>
-			</div>
-		</div>
-
-<?php
-}
-else{
-?>
-	<div class="col-3" align="right">
-			<div class="my-md-3">
-				<a href="login.php"><button class="btn" 
-style="
-	background-color: #29a3a3;
-	border-radius: 25px;
-	width: 130px;
-    border: none;
-    color: white;
-    font-weight: 500;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 16px;
-    margin-right: 20px;
-  ">Log In</button></a>
-			</div>
-		</div>
 
 
-<?php
-}
-?>
+
 
 		
+			<div class="col-2" align="right">
+				<div class="my-md-3">
+			<form action="includes/logout.php" method="POST">
+				<button name="logout" class="btn" style="
+						background-color: #29a3a3;
+						border-radius: 25px;
+						width: 130px;
+					    border: none;
+					    color: white;
+					    font-weight: 500;
+					    padding: 10px 20px;
+					    text-align: center;
+					    font-size: 16px;
+					   
+					  
+				  ">Log Out</button>
+				  </form>
+			</div>
+		</div>
+		<div class="col-1" align="left">
+			
+			<div class="my-md-3">
+				<a href="index.php"><button class="btn" style="
+						background-color: #29a3a3;
+						border-radius: 25px;
+					    border: none;
+					    color: white;
+					    font-weight: 600;
+					    padding: 10px 20px;
+					    text-align: center;
+					    font-size: 16px;
+					   
+					  
+				  "><i class="bi bi-house"></i></button></a>
+				</div>
+			</div>
+
 	</div>
 		
 </div>
