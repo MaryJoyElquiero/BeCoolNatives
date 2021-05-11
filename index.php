@@ -18,7 +18,7 @@ session_start();
 
 <div class="banner">
 	<div class="row">
-		<div class="col-5" align="left">
+		<div class="col-6" align="left">
 
 				<div class="intro">
 					<div class="logo"><img src="img/logo2.png"></div>
@@ -32,11 +32,11 @@ session_start();
 				</div>
 			</div>
 
-		<div class="col-7 search" align="right">
+		<div class="col-6 search" align="right">
 			<form action="index.php" method="GET">
 			<div class="my-md-1">
 				<div class="input-group">
-					<input class="searchkey" type="text" name="searchkey" placeholder="Naghahanap ako ki...">
+					<input class="searchkey" type="text" name="searchkey" placeholder="Search Item">
 					<button class="searchbtn" name="search"><i class="bi bi-search"></i></button>
 				</div>
 			</div>
@@ -49,7 +49,7 @@ session_start();
 	<div class="categories">
 		<form method="POST" action="index.php" class="category">
 		<button type="submit" name="categoryAll">All</button>
-	</form>
+		</form>
 		<?php 
 		include "includes/conn.php";
 
@@ -94,7 +94,7 @@ session_start();
 				echo "<p class='text-success' align='center'>Added to Cart</p>";
 				break;
 			case 3:
-				echo "<p class='text-success' align='center'>Profile Saved</p>";
+				echo "<p class='text-success' align='center'>Welcome to BeCool</p>";
 				break;
 			case 4:
 				echo "<p class='text-success' align='center'>Logged In</p>";
@@ -110,45 +110,53 @@ session_start();
 	
 		if (isset($_POST['category'])) {
 		$category=htmlentities($_POST['cat_desc']);
-		$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name, p.price_amt, ct.cat_desc
+		$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name, p.price_amt, ct.cat_desc, sh.shop_name,i.shop_id
 									FROM items i
 									JOIN category ct
 									ON ct.cat_id= i.cat_id
 									JOIN price p
 									ON i.item_id=p.item_id
+									JOIN shop sh
+									ON i.shop_id= sh.shop_id
 									WHERE i.item_stat='Active'
 									AND ct.cat_desc='$category';";
 		}
 		elseif(isset($_GET['search'])) {
 			$searchkey=htmlentities($_GET['searchkey']);
-			$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name, p.price_amt, ct.cat_desc
+			$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name, p.price_amt, ct.cat_desc, sh.shop_name,i.shop_id
 									FROM items i
 									JOIN category ct
 									ON ct.cat_id= i.cat_id
 									JOIN price p
 									ON i.item_id=p.item_id
+									JOIN shop sh
+									ON i.shop_id= sh.shop_id
 									WHERE i.item_stat='Active'
 									AND i.item_name LIKE '$searchkey%';
 									";
 		}
 
 		elseif(isset($_POST['categoryAll'])) {
-			$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name, p.price_amt, ct.cat_desc
+			$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name, p.price_amt, ct.cat_desc, sh.shop_name,i.shop_id
 									FROM items i
 									JOIN category ct
 									ON ct.cat_id= i.cat_id
 									JOIN price p
 									ON i.item_id=p.item_id
+									JOIN shop sh
+									ON i.shop_id= sh.shop_id
 									WHERE i.item_stat='Active';";
 		}
 
 		else{
-		$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name,p.price_amt, ct.cat_desc
+		$sql= "SELECT i.item_id,p.price_id, i.item_img, i.item_name,p.price_amt, ct.cat_desc, sh.shop_name,i.shop_id
 									FROM items i
 									JOIN category ct
 									ON ct.cat_id= i.cat_id
 									JOIN price p
 									ON i.item_id=p.item_id
+									JOIN shop sh
+									ON i.shop_id= sh.shop_id
 									WHERE i.item_stat='Active';";
 		}
 		$stmt= mysqli_stmt_init($conn);
@@ -162,43 +170,53 @@ session_start();
 		while ($row=mysqli_fetch_assoc($result)) {
 			array_push($arr, $row);
 		}
+		if (empty($arr)) {
+			echo "<div class='empty'>";
+						echo "<p> <i class='bi bi-bag-x'></i>  It's Empty Here </p>";
+						echo "</div>";
+		}
 		foreach ($arr as $key => $val) {
 
-
+?>
 	
-			echo "<div class='content'>";
+			<div class="content">
 
-			echo "<form action='includes/addtocart.php' method='POST'>";
-						echo "<input type='hidden' name='item_id' value='".$val['item_id']."'>";
-						echo "<input type='hidden' name='price_id' value='".$val['price_id']."'>";
-						echo "<input type='hidden' name='price_amt' value='".$val['price_amt']."'>";
-						echo "<div class='img-box'>";
-						echo "<img src='items/".$val['item_img']."' >";
-						echo "<div class='details'>";
-						echo "<p>".$val['item_name']."</p>";
-						echo "<div class='price'>Php".number_format($val['price_amt'],2)."</div>";
-						?>
+				<form action="includes/addtocart.php" method="POST">
+		
+						<input type="hidden" name="item_id" value="<?php echo $val['item_id']; ?>">
+						<input type="hidden" name="price_id" value="<?php echo $val['price_id']; ?>">
+						<input type="hidden" name="price_amt" value="<?php echo $val['price_amt']; ?>">
+						
+						<a href="shop_page.php?shop_id=<?php echo $val['shop_id'];?>">
+							<div class="shop_name">
+							<i class="bi bi-shop"></i>
+							<p> <?php echo $val['shop_name'];?></p>
+							</div>
+						</a>
+						<div class="img-box">
+						<img src="items/<?php echo $val['item_img'];?>">
+						</div>
+						<div class="details">
+						
+						<p><?php echo $val['item_name'];?> </p>
+
+						<div class="price">Php <?php echo number_format($val['price_amt'],2); ?></div>
 
 						<div class="itemqty">
 							<input type="number" name="item_qty" placeholder="set quantity" required="">
 						</div>
 						<div class="actions">
-						<button name="addtocartbtn" type="submit">
-							<h4><i class="bi bi-cart-plus"></i></h4>
-						</button>
-						<button name="buynow" type="submit">Buy Now</button>
+							<button name="addtocartbtn" type="submit">
+								<h4><i class="bi bi-cart-plus"></i></h4>
+							</button>
+							<button name="buynow" type="submit">Buy Now</button>
 						</div>
-						</form>
-						<?php
-						echo "</div>";
-						echo "</div>";
-			echo "</div>";
+					</div>
+				</form>
+			</div>
+	<?php } ?>
 	
-		}
-
-		 ?>
 </div>
-
 
 </div>
 
@@ -207,10 +225,10 @@ session_start();
 <script src="js/custom.js"></script>
 
 
-
-</script>
 </body>
 </html>
+
+
 
 
 
