@@ -33,8 +33,8 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 			<form action="completed.php" method="GET">
 			<div class="my-md-2">
 				<div class="input-group">
-					<input class="form-control" type="text" name="searchkey" placeholder="Search Completed Orders">
-					<button class="btn btn-outline-dark" name="search"><i class="bi bi-search"></i></button>
+					<input class="searchkey" type="text" name="searchkey" placeholder="Search Completed Orders">
+					<button class="searchbtn" name="search"><i class="bi bi-search"></i></button>
 				</div>
 			</div>
 		</form>
