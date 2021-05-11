@@ -6,7 +6,7 @@ session_start();
 <html>
 <head>
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="css/shopindex.css">
+    <link rel="stylesheet" href="css/shopview.css">
     <link rel="stylesheet" href="font/bootstrap-icons.css">
 	<title>SHOP</title>
 </head>
@@ -29,7 +29,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 
 	<div class="banner">
 	<div class="row">
-		<div class="col-5" align="left">
+		<div class="col-6" align="left">
 			<div class="shopname">
 					<div class="icon"><i class="bi bi-shop"></i></div>				
 					<div class="text">
@@ -63,13 +63,16 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 						?>
 					 
 
-					</div>				
+					</div>
+					<div class="edit"><a href="editshop.php">Edit Shop Name</a></div>
+							
 			</div>
+
 		</div>
 			
 
-		<div class="col-7 search" align="right">
-			<form action="shopindex.php" method="GET">
+		<div class="col-6 search" align="right">
+			<form action="shopview.php" method="GET">
 			<div class="my-md-1">
 				<div class="input-group">
 					<input class="searchkey" type="text" name="searchkey" placeholder="Naghahanap ako ki...">
@@ -83,7 +86,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 </div>
 
 	<div class="categories">
-		<form method="POST" action="shopindex.php" class="category">
+		<form method="POST" action="shopview.php" class="category">
 		<button type="submit" name="categoryAll">All</button>
 		</form>
 		<?php 
@@ -105,7 +108,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 		}
 		foreach ($arr as $key => $val) {
 			
-			echo "<form method='POST' action='shopindex.php' class='category'>";
+			echo "<form method='POST' action='shopview.php' class='category'>";
 			echo "<input type='hidden' name='cat_desc' value=".$val['cat_desc'].">";
 			echo "<button type='submit' name='category'>".$val['cat_desc']."</button>";
 			echo "</form>";
@@ -161,6 +164,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 									ON a.acc_id= sh.acc_id								
 									WHERE a.email='{$_SESSION['email']}'
 									AND a.password='{$_SESSION['password']}'
+									AND i.item_stat='Active'
 									AND ct.cat_desc='$category';";
 		}
 		elseif(isset($_GET['search'])) {
@@ -176,7 +180,8 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 									JOIN accounts a
 									WHERE a.email='{$_SESSION['email']}'
 									AND a.password='{$_SESSION['password']}'
-									AND i.item_name LIKE '$searchkey%';
+									AND i.item_name LIKE '$searchkey%'
+									AND i.item_stat='Active';
 									";
 		}
 
@@ -192,7 +197,8 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 									JOIN accounts a
 									ON a.acc_id= sh.acc_id								
 									WHERE a.email='{$_SESSION['email']}'
-									AND a.password='{$_SESSION['password']}';";
+									AND a.password='{$_SESSION['password']}'
+									AND i.item_stat='Active';";
 		}
 
 		else{
@@ -205,11 +211,12 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 									JOIN accounts a
 									ON a.acc_id=sh.acc_id								
 									WHERE a.email='{$_SESSION['email']}'
-									AND a.password='{$_SESSION['password']}';";
+									AND a.password='{$_SESSION['password']}'
+									AND i.item_stat='Active';";
 		}
 		$stmt= mysqli_stmt_init($conn);
 		if(!mysqli_stmt_prepare($stmt,$sql)) {
-			header("Location:shopindex.php?error=Connection Failed");
+			header("Location:shopview.php?error=Connection Failed");
 			exit();
 		}
 		mysqli_stmt_execute($stmt);
@@ -217,6 +224,11 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 		$arr= array();
 		while ($row=mysqli_fetch_assoc($result)) {
 			array_push($arr, $row);
+		}
+		if (empty($arr)) {
+			echo "<div class='empty'>";
+						echo "<p> <i class='bi bi-bag-x'></i>  It's Empty Here </p>";
+						echo "</div>";
 		}
 		foreach ($arr as $key => $val) {
 
@@ -268,5 +280,8 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 </script>
 </body>
 </html>
+
+
+
 
 
