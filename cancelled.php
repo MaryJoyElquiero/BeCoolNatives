@@ -30,11 +30,11 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 			
 		</div>
 		<div class="col-md-5 col-12" align="right">
-			<form action="toship.php" method="GET">
+			<form action="cancelled.php" method="GET">
 			<div class="my-md-2">
 				<div class="input-group">
-					<input class="form-control" type="text" name="searchkey" placeholder="Search To Ship Orders">
-					<button class="btn btn-outline-dark" name="search"><i class="bi bi-search"></i></button>
+					<input class="searchkey" type="text" name="searchkey" placeholder="Search Cancelled Orders">
+					<button class="searchbtn" name="search"><i class="bi bi-search"></i></button>
 				</div>
 			</div>
 		</form>
@@ -294,5 +294,7 @@ else{
 <script src="js/custom.js"></script>
 </body>
 </html>
+
+
 
 
