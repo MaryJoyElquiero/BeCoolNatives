@@ -29,7 +29,7 @@
 				          <a class="nav-link" href="cart.php"><b><i class="bi bi-cart" style="font-size:26px; font-weight: 600; "></i> Cart</a></b>
 				        </li>
 				        <li class="nav-item">
-				          <a class="nav-link" href="myorders.php"><b><i class="bi bi-handbag" style="font-size:26px; font-weight: 600; "></i> My Orders</a></b>
+				          <a class="nav-link" href="topay.php"><b><i class="bi bi-handbag" style="font-size:26px; font-weight: 600; "></i> My Orders</a></b>
 				        </li>
 				        <li class="nav-item">
 				          <a class="nav-link" href="account.php"><b><i class="bi bi-person" style="font-size:26px; font-weight: 600; "></i> Account</a></b>
@@ -48,18 +48,20 @@ if (isset($_SESSION['password']) || isset($_SESSION['email'])) {
 ?>
 		<div class="col-3" align="right">
 			<div class="my-md-3">
-				<a href="login.php"><button class="btn" style="
-	background-color: #29a3a3;
-	border-radius: 25px;
-	width: 130px;
-    border: none;
-    color: white;
-    font-weight: 500;
-    padding: 10px 20px;
-    text-align: center;
-    font-size: 16px;
-    margin-right: 20px;
-  ">Log Out</button></a>
+				<form action="includes/logout.php" method="POST">
+				<button name="logout" class="btn" style="
+					background-color: #29a3a3;
+					border-radius: 25px;
+					width: 130px;
+				    border: none;
+				    color: white;
+				    font-weight: 500;
+				    padding: 10px 20px;
+				    text-align: center;
+				    font-size: 16px;
+				    margin-right: 20px;
+				  ">Log Out</button>
+  </form>
 			</div>
 		</div>
 
@@ -89,6 +91,8 @@ style="
 <?php
 }
 ?>
+
+
 
 		
 	</div>
