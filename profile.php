@@ -5,11 +5,10 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ACCOUNT</title>
+	<title>SET UP PROFILE</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css"> 
     <link rel="stylesheet" href="css/editprofile.css">
     <link rel="stylesheet" href="font/bootstrap-icons.css">
-	<title>HOME</title>
 </head>
 <body>
 
@@ -39,7 +38,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				<div class="info"> 
 					<div class="label">Full Name:</div>
 					<div class="text">
-						<input type="text" name="cn" placeholder="Full Name" autofocus>
+						<input type="text" name="fn" placeholder="Full Name" required autofocus>
 					</div>
 				</div>
 			</div>
@@ -51,13 +50,13 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 					<div class="label">Address:</div>
 					<div class="address">
 
-						<input type="text" name="province" placeholder="Province">
+						<input type="text" name="province" placeholder="Province" required>
 						
-						<input type="text" name="city"  placeholder="City">
+						<input type="text" name="city"  placeholder="City" required>
 						
-						<input type="text" name="brgy" Placeholder="Baranggay">
+						<input type="text" name="brgy" Placeholder="Baranggay" required> 
 						
-						<input type="text" name="add_details" placeholder="Address Details">
+						<input type="text" name="add_details" placeholder="Address Details" required>
 					</div>
 				</div>
 			</div>
@@ -68,7 +67,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				<div class="info"> 
 					<div class="label">Phone Number:</div>
 					<div class="text">
-						<input type="text" name="pn" placeholder="Phone Number">
+						<input type="text" name="pn" placeholder="Phone Number" required> 
 					</div>
 				</div>
 			</div>
@@ -79,7 +78,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				<div class="info"> 
 					<div class="label">Age:</div>
 					<div class="text">
-						<input type="number" name="age" placeholder="Age">
+						<input type="number" name="age" placeholder="Age" required>
 					</div>
 				</div>
 			</div>
@@ -90,7 +89,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				<div class="info"> 
 					<div class="label">Gender:</div>
 					<div class="text">
-						 <select class="form-select" name="gender" required="">
+						 <select class="form-select" name="gender" required>
 	                      <option selected>Select</option>
 						  <option value="Male">Male</option>
 						  <option value="Female">Female</option> 
