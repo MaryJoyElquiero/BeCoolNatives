@@ -54,7 +54,7 @@ if (isset($_POST['confirm'])) {
 
 
 if (isset($_POST['buy'])) {
-	 $item_id=htmlentities($_POST['item_id']);
+	$item_id=htmlentities($_POST['item_id']);
 	header("Location:../orderform.php?id=$item_id");
 	exit();
 }
@@ -63,6 +63,9 @@ else{
 	header("Location:../cart.php");
 	exit();
 }
+
+
+
 
 
  ?>
