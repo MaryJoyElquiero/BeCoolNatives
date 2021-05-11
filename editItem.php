@@ -37,13 +37,8 @@ if (isset($_GET['id'])) {
 									ON ct.cat_id= i.cat_id
 									JOIN price p
 									ON i.item_id=p.item_id
-									JOIN shop sh
-									ON i.shop_id=sh.shop_id
-									JOIN accounts a
-									ON a.acc_id=sh.acc_id								
-									WHERE a.email='{$_SESSION['email']}'
-									AND a.password='{$_SESSION['password']}'
-									AND i.item_id='$item_id';";
+									where
+									 i.item_id='$item_id';";
 
 	$stmt= mysqli_stmt_init($conn);
 
@@ -99,7 +94,7 @@ if (isset($_GET['id'])) {
 				<div class="info"> 
 					<div class="label">Item Name:</div>
 					<div class="text">
-						<input type="text" name="item_name" value="<?php echo $val['item_name'];  ?>" placeholder="Item Name" autofocus>
+						<input type="text" name="item_name" value="<?php echo $val['item_name'];  ?>" placeholder="Item Name" required autofocus>
 					</div>
 				</div>
 			</div>
@@ -110,7 +105,7 @@ if (isset($_GET['id'])) {
 				<div class="info"> 
 					<div class="label">Item Short Code:</div>
 					<div class="text">
-						<input type="text" name="item_sc" value="<?php echo $val['item_short_code'];  ?>" placeholder="Item Short Code">
+						<input type="text" name="item_sc" value="<?php echo $val['item_short_code'];  ?>" placeholder="Item Short Code" required>
 					</div>
 				</div>
 			</div>
@@ -121,7 +116,7 @@ if (isset($_GET['id'])) {
 				<div class="info"> 
 					<div class="label">Price:</div>
 					<div class="text">
-						<input type="number" name="price_amt" value="<?php echo $val['price_amt'];  ?>" placeholder="Item Price">
+						<input type="number" name="price_amt" value="<?php echo $val['price_amt'];  ?>" placeholder="Item Price" required>
 					</div>
 				</div>
 			</div>
@@ -133,7 +128,7 @@ if (isset($_GET['id'])) {
 					<div class="label">Category:</div>
 					<div class="text">
 
-						 <select class="form-select" name="cat_desc" required="">
+						 <select class="form-select" name="cat_desc" required>
 	                      <option selected value="<?php echo $val['cat_id'];?>"><?php echo $val['cat_desc'];?></option>
 								<?php 
 									include "includes/conn.php";
@@ -158,6 +153,37 @@ if (isset($_GET['id'])) {
 				</div>
 			</div>
 		</div>
+
+		<div class="row">
+			<div class="acc-info">
+				<div class="icon"><i class="bi bi-tag"></i></div>
+				<div class="info"> 
+					<div class="label">Item Status:</div>
+					<div class="text">
+
+						 <select class="form-select" name="item_stat" <?php  
+	                      		if ($val['item_stat']=="Pending") {
+	                      			echo "disabled";
+	                      		}
+	                      ?> required >
+	                      <option selected value="<?php echo $val['item_stat'];?>"><?php echo $val['item_stat'];?></option>
+	                      <?php  
+	                      		if ($val['item_stat']=="Discontinued") {
+	                      			echo "<option value='Active'>Active</option>";
+	                      		}
+	                      		if ($val['item_stat']=="Active") {
+	                      			echo "<option value='Discontinued'>Discontinue</option>";
+	                      		}
+	                      		
+	                      ?>
+	                    
+	                  
+						</select>    
+					</div>
+				</div>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="savebtn">
 				<div class="info">
