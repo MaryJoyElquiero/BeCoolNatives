@@ -1,4 +1,7 @@
+body{
 
+		background-color: #f7f7f7;
+}
 .text-danger{
 	width: 500px;
 	background: #F2DEDE;
@@ -13,5 +16,15 @@
 }
 
 #content{
-	margin-top:130px;
+	margin-top:100px;
+}
+
+.img-box{
+	height: 100px;
+	width: 100px;
+}
+.img-box img{
+	display: block;
+	height: 100%;
+	width: 100%;
 }
