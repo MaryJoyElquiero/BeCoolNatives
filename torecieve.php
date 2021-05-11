@@ -30,11 +30,11 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 			
 		</div>
 		<div class="col-md-5 col-12" align="right">
-			<form action="topay.php" method="GET">
+			<form action="torecieve.php" method="GET">
 			<div class="my-md-2">
 				<div class="input-group">
-					<input class="form-control" type="text" name="searchkey" placeholder="Search To Pay Orders">
-					<button class="btn btn-outline-dark" name="search"><i class="bi bi-search"></i></button>
+					<input class="searchkey" type="text" name="searchkey" placeholder="Search to Recieve Orders">
+					<button class="searchbtn" name="search"><i class="bi bi-search"></i></button>
 				</div>
 			</div>
 		</form>
@@ -47,13 +47,13 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
     <a class="nav-link " href="myorders.php">All</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link  active"  style="background-color:#29a3a3;" aria-current="page"  href="topay.php"> To Pay </a>
+    <a class="nav-link " href="topay.php"> To Pay </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="toship.php"> To Ship </a>
   </li>
     <li class="nav-item">
-    <a class="nav-link" href="torecieve.php"> To Recieve</a>
+    <a class="nav-link active"  style="background-color:#29a3a3;" aria-current="page"   href="torecieve.php"> To Recieve</a>
   </li>
     <li class="nav-item">
     <a class="nav-link" href="completed.php"> Completed</a>
@@ -63,6 +63,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
   </li>
  
 </ul>
+
 
 
 
@@ -81,8 +82,8 @@ if (isset($_GET['search'])) {
 					 	ON o.acc_id= ac.acc_id
 					 	WHERE ac.email='{$_SESSION['email']}'
 						AND ac.password='{$_SESSION['password']}'
-						AND i.item_name LIKE '$searchkey%'
-						AND o.order_status='To Pay'
+						AND i.item_name='$searchkey'
+						AND o.order_status='To Recieve'
 					 	GROUP BY o.order_date
 					 	ORDER BY o.order_date
 					 	DESC;";
@@ -99,7 +100,7 @@ else{
 					 	ON o.acc_id= ac.acc_id
 					 	WHERE ac.email='{$_SESSION['email']}'
 						AND ac.password='{$_SESSION['password']}'
-						AND o.order_status='To Pay'
+						AND o.order_status='To Recieve'
 					 	GROUP BY o.order_date
 					 	ORDER BY o.order_date
 					 	DESC;";
@@ -140,8 +141,8 @@ if (isset($_GET['search'])) {
 					 	WHERE ac.email='{$_SESSION['email']}'
 						AND ac.password='{$_SESSION['password']}'
 						AND o.order_date='$order_date'
-						AND i.item_name LIKE '$searchkey%'
-						AND o.order_status='To Pay'
+						AND i.item_name='$searchkey'
+						AND o.order_status='To Recieve'
 					 	GROUP BY sh.shop_name;";
 }
 else{
@@ -157,7 +158,7 @@ else{
 					 	WHERE ac.email='{$_SESSION['email']}'
 						AND ac.password='{$_SESSION['password']}'
 						AND o.order_date='$order_date'
-						AND o.order_status='To Pay'
+						AND o.order_status='To Recieve'
 					 	GROUP BY sh.shop_name;";
 }
 					 	$stmt2= mysqli_stmt_init($conn);
@@ -177,11 +178,10 @@ else{
 
 
 	?>
-
 <div class="order-items">
 	<div class="row">
 		<div class="col-12 shop_name">
-			<p><i class="bi bi-shop"></i>  <?php echo $shop; ?></p>
+			<p><?php echo $shop; ?></p>
 		</div>	
 	</div>
 	<hr>
@@ -200,8 +200,8 @@ if (isset($_GET['search'])) {
 							 	 WHERE sh.shop_name = '$shop'
 							 	 AND o.order_date='$order_date'
 							 	 AND ac.email='{$_SESSION['email']}'
-							 	 AND i.item_name LIKE '$searchkey%'
-							 	 AND o.order_status='To Pay'
+							 	 AND i.item_name='$searchkey'
+							 	 AND o.order_status='To Recieve'
 							 	 AND ac.password='{$_SESSION['password']}';";
 
 }
@@ -216,7 +216,7 @@ else{
 								  ON ac.acc_id=o.acc_id
 							 	 WHERE sh.shop_name = '$shop'
 							 	 AND o.order_date='$order_date'
-							 	 AND o.order_status='To Pay'
+							 	 AND o.order_status='To Recieve'
 							 	 AND ac.email='{$_SESSION['email']}'
 							 	 AND ac.password='{$_SESSION['password']}';";
 }
@@ -256,11 +256,11 @@ else{
 			<div class="order_total">
 				
 				<p class="label"> Total: </p>
-				<p class="order_total"> Php <?php  echo number_format($value['order_total'],2);?></p>
-				<p> <?php  echo $value['order_status'];?></p>
+				<p class="order_total">Php <?php  echo number_format($value['order_total'],2);?></p>
+				<p>Shipped</p>
 				<form action="includes/orderstatus.php" method="POST">
 				<input type="hidden" name="order_id" value="<?php  echo $value['order_id'];?>">
-				<button class="btn btn-outline-danger" name="cancel"> Cancel Order</button>
+				<button class="btn btn-outline-success" name="recieved"> Item Recieved</button>
 				</form>
 			</div>
 		</div>
@@ -272,7 +272,6 @@ else{
 			</div>
 		</div>
 	</div>
-
 
 <hr>
 <?php } ?>
@@ -289,12 +288,14 @@ else{
 </div>
 
 
-
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/custom.js"></script>
 </body>
 </html>
+
+
+
 
 
 
