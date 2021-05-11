@@ -26,6 +26,12 @@
       case 4:
         echo "<p class='text-danger' align='center'>Failed to create account</p>";
         break;
+      case 5:
+        echo "<p class='text-danger' align='center'>Email is already Taken</p>";
+        break;
+      case 6:
+        echo "<p class='text-danger' align='center'>Password is too short</p>";
+        break;
       default:
         echo "";
         break;
@@ -58,7 +64,7 @@
                       <form action="includes/signup_connect.php" method="POST">
                             <div class="field">
                               <span class="bi bi-envelope"></span>
-                              <input type="text" name="email" required="" placeholder="Email">               
+                              <input type="email" name="email" required="" placeholder="Email">               
                             </div>
                             <div class="field">
                               <span class="bi bi-lock"></span>
