@@ -4,32 +4,31 @@ body{
 }
 
 .login{
-	margin-top: 100px;
+	margin: 100px auto;
+
 }
 .intro-details{
-	display: inline-flex;
-	margin-top: 10px;
-	margin-left: 200px;
-	margin-right: 200px;
+
+	margin: 10px auto;
+	width: 700pt;
+	height: 450px;
 	background-color: white;
 	box-shadow: 0 5px 15px rgba(0,0,0,0.25);
-
+	display: flex;
+	
 	
 }
 .intro-boxintro{
-	position: relative;
-	display: inline-block;
-	width: 400px;
-	height: 430px;
-	border-radius: 3px;
+	width: 50%;
+	position: relative;	
 	overflow: hidden;
-
-
+	background-color: #ebfafa;
+	height: 100%;
+	text-align: center;
+	
 }
 .intro{
-	align-self: center;
-	margin: 60px;
-	margin-left: 100px;
+	margin: 75pt 55pt;
 }
 
 .welcome{
@@ -53,24 +52,18 @@ body{
 
 
 .content-box{
-
 	position: relative;
-	display: inline-block;
-	width: 500px;
-	height:400px;
-	border-radius: 4px;
 	overflow: hidden;
-
+	margin: 35px auto;
+	height: 100%;
+	
 }
 
 .content{
-	position: center;
-	width: 400;
-	height: 300;
-	box-sizing: border-box;
+	height: auto;
 	display: grid;
 	text-align: center;
-	margin-top: 15px;
+	margin: 5px auto;
 }
 
 .content .text{
@@ -79,7 +72,6 @@ body{
 	color: #29a3a3;
 
 }
-
 
 .text h1{
 	font-size: 50px;
@@ -161,9 +153,18 @@ body{
 }
 
 p.text-danger{
-	margin-left: 400px;
-	width: 500px;
+	margin: 0 auto;
+	width: 400px;
 	background: #F2DEDE;
+	border-radius: 25px;
+	height: 25px;
+}
+p.text-success{
+
+	
+	margin: 0 auto;
+	width: 400px;
+	background: #bcf7cc;
 	border-radius: 25px;
 	height: 25px;
 }
