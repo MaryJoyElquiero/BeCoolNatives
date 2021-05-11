@@ -1,0 +1,92 @@
+body{
+background-color: #f7f7f7;
+}
+.shop{
+
+	margin-top: 90px;
+
+}
+
+.header{
+	background: white;
+	margin: 0 auto;
+	width: 600px;
+	margin-top: 10px;
+	height: 50px;
+}
+.header .info{
+	margin-top: 10px;
+	margin-left: 20px;
+	font-weight: 600;
+	font-size: 20px;
+}
+
+.shop-info{
+	margin: 0 auto;
+	display: inline-flex;
+	background: white;
+	width: 600px;
+	margin-top: 10px;
+	height: 130px;
+}
+.shop-info .info{
+	width: 570px;
+	margin-top: 10px;
+}
+
+.icon{
+	font-size: 40px;
+	color: #6697A7;
+	margin-right: 20px;
+	margin-left: 20px;
+}
+
+.text-success{
+  	width: 500px;
+	background: #bcf7cc;
+	border-radius: 25px;
+	height: 25px;
+	margin-left: 20px;
+	margin-top: 10px;
+	text-align: center;
+}
+.text-danger{
+	width: 500px;
+	background: #F2DEDE;
+	border-radius: 25px;
+	height: 25px;
+	margin-top: 10px;
+	margin-left: 20px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.info .text{
+	display: inline-grid;
+}
+
+.shop input{
+	width: 450px; 
+	height: 40px;
+	outline: none;
+	border: none;
+	background:#ebfafa;
+}
+.shop button{
+	background-color: #29a3a3;
+	border: none;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    height: 38px;
+    margin-top: 5px;
+}
+
+.shop button:hover{
+	background-color:#1d8080;
+	border: none;
+    color: white;
+    font-weight: 500;
+    font-size: 18px;
+    height: 38px;
+}
