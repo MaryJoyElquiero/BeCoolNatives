@@ -1,12 +1,13 @@
 <?php 
 session_start();
-if (isset($_POST['addtocartbtn'])) {
 
 if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 	header("Location:../login.php?error=1");
 	exit();
 }
-else{
+
+
+if (isset($_POST['addtocartbtn'])) {
 	include_once "conn.php";	
 	$item_id=htmlentities($_POST['item_id']);
 	$price_id=htmlentities($_POST['price_id']);
@@ -15,7 +16,7 @@ else{
 	$total_amt=$item_qty* $price_amt;
 
 	$sql="SELECT acc_id FROM accounts WHERE email='{$_SESSION['email']}' 
-	and password='{$_SESSION['password']}'";
+	and password='{$_SESSION['password']}';";
 	$result = mysqli_query($conn, $sql); 
 	if (mysqli_num_rows($result)) { 
 	    while ($row = mysqli_fetch_assoc($result)) { 
@@ -42,10 +43,19 @@ else{
 	exit();
 }	
 
+
+if (isset($_POST['buynow'])) {
+	$item_id=htmlentities($_POST['item_id']);
+	$item_qty=htmlentities($_POST['item_qty']);
+	$price_amt=htmlentities($_POST['price_amt']);
+	$total_amt= $item_qty * $price_amt;
+
+
+	header("Location: ../orderform2.php?item_id=$item_id&&item_qty=$item_qty&&total_amt=$total_amt&&price_amt=$price_amt");
+	exit();
+	
 }
 
 
 
  ?>
-
-
