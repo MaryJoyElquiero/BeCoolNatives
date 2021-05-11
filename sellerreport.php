@@ -36,9 +36,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 				<div class="card-header" style="background-color:white;">
 					<div class="row mt-2">
 
-							    
-
-			    		<div class="col-4">
+			    		<div class="col-4 align-self-right">
 								<form method="GET">
 									<div class="input-group">
 										<input type="text" name="search" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search item name">
@@ -64,42 +62,46 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 	}
 
 
-
-
 	 ?>
 </div>
-	 <ul class="nav nav-pills nav-fill">
-
-    <li class="nav-item">
-  	<a class="nav-link active"  style="background-color:#29a3a3;" aria-current="page" href=" sellerreport.php"> Seller Report</a>
-    
-  </li>
-    <li class="nav-item">
-  <a class="nav-link "  style="background-color:white;color:black;" href=" adminReport 1.php"> Registered Accounts</a>
-    
-    
-  </li>
-  <li class="nav-item">
- <a class="nav-link "  style="background-color:white;color:black;" href=" adminReport 2.php">Shop Total Sales</a>
-    
-    
-  </li>
-   
-   
-</ul>
     <div class="container-fluid">
     	<div class="row">
     	<div class="col">
 
     		<?php 
+					$sql="SELECT sh.shop_id from shop sh
+						JOIN accounts ac
+						ON sh.acc_id=ac.acc_id
+						WHERE ac.email='{$_SESSION['email']}'
+						AND ac.password='{$_SESSION['password']}';";
+
+	
+					$stmt= mysqli_stmt_init($conn);
+					if(!mysqli_stmt_prepare($stmt,$sql)) {
+					header("Location:seller_dashboard.php?error=ConnectionFailed1");
+					exit();
+
+					}
+					mysqli_stmt_execute($stmt);
+					$result=mysqli_Stmt_get_result($stmt);
+					$arr= array();
+					while ($row=mysqli_fetch_assoc($result)) {
+					array_push($arr, $row);
+					}
+				
+					foreach ($arr as $key => $val) {
+						$shop_id = $val['shop_id']; 
+
+
     		$sql= "SELECT  i.item_name
                      , i.item_short_code 
                      , SUM(o.order_total) as order_total
                      ,SUM(o.order_qty) as order_qty 
-    		              from orders o
-    		              JOIN items i 
-    		              on i.item_id = o.item_id
-    		              GROUP by i.item_id";
+    		           from orders o
+    		           JOIN items i 
+    		           on i.item_id = o.item_id
+    		           WHERE i.shop_id= '$shop_id'
+    		           GROUP by i.item_id";
    
    
 				$stmt=mysqli_stmt_init($conn);
@@ -132,7 +134,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 				echo "<td>". $value['item_name'] ."</td>";
 				echo "<td>". $value['item_short_code'] ."</td>";
 				echo "<td>". $value['order_qty'] ."</td>";
-				echo "<td>Php ". $value['order_total'] ."</td>";
+				echo "<td>Php " . number_format($value['order_total'],2) ."</td>";
 				echo "</tr>";
 			    }
 			    echo "<tr>";
@@ -141,13 +143,13 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 			}
 			 else {
 			    echo "<tr>";
-			    echo "<td colspan =100 class='text-center'><em> No records Found  </em></td>";
+			    echo "<td colspan =100 class='text-center'><em> Empty </em></td>";
 			    echo "</tr>";
 			    }
 			    echo "</table>";
 			
 
-			   
+			   }
 
     		 ?>
     		
