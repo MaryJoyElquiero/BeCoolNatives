@@ -79,9 +79,7 @@ body{
 .actions button{
 	margin-left: 10px;
 }
-.bi-bag-x{
-	font-size: 50px;
-}
+
 .qty{
 	display: inline-flex;
 }
@@ -126,4 +124,12 @@ body{
 	border-style: solid;
 	border-color: #29a3a3;
 	
+}
+.empty{
+	text-align: center;
+	margin-top: 100px;
+	font-size: 24px;
+}
+.bi-bag-x{
+	font-size: 50px;
 }
