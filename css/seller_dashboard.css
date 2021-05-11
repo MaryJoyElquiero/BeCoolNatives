@@ -1,0 +1,45 @@
+body{
+	background-color: #f7f7f7;
+
+}
+
+.dashboard{
+	margin: 100px auto;
+
+	text-align: center;
+	
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+
+.box{
+	display: inline-flex;
+	position: relative;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 30px;
+	height: 200px;
+	width: 400px;
+}
+
+.box .content{
+	margin: 0 auto;
+	text-align: center;
+
+}
+
+.content .number{
+	font-size: 50px;
+	margin-top: 30px;
+	font-weight: 600;
+}
+
+.content .label{
+
+	font-size: 20px;
+	margin-top: 10px;
+
+}
