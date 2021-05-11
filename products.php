@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+
+
+if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
+	header("Location:login.php?error=1");
+	exit();
+}
+
+
+ ?>
 <!DOCTYPE html>
 <head>
 
@@ -75,12 +87,19 @@
 <div class="container-fluid" id="content">
 
 			<div class="card mt-3">
-				<div class="card-header">
+				<div class="card-header" style="background-color:white;">
 					<div class="row mt-2">
 
 						<div class="col-4">
 				  				<?php  
-				  					$sql="select count('1') from items;";
+				  					$sql="SELECT count('1') FROM items i
+				  					JOIN shop sh
+									ON i.shop_id=sh.shop_id
+									JOIN accounts a
+									ON a.acc_id=sh.acc_id								
+									WHERE a.email='{$_SESSION['email']}'
+									AND a.password='{$_SESSION['password']}'
+				  					;";
 									$result=mysqli_query($conn,$sql);
 									$row=mysqli_fetch_array($result);
 									echo "<p class='fs-5'>Total:". $row[0]. "</p>";
@@ -126,7 +145,21 @@
 			case 6:
 				echo "<p class='text-success' align='center'> Item deleted</p>";
 				break;
-			
+			case 7:
+				echo "<p class='text-success' align='center'>Saved</p>";
+				break;
+			case 8:
+				echo "<p class='text-danger' align='center'>Not Saved</p>";
+				break;
+			case 9:
+				echo "<p class='text-danger' align='center'> File is not an Image</p>";
+				break;
+			case 10:
+				echo "<p class='text-danger' align='center'> Only JPG, JPEG and PNG are allowed</p>";
+				break;
+			case 10:
+				echo "<p class='text-danger' align='center'> File is too Large</p>";
+				break;
 			default:
 				echo "";
 				break;
@@ -144,12 +177,18 @@
     	<div class="col">
 
     		<?php 
-    		$sql= "SELECT i.item_id, i.item_name,i.item_short_code, p.price_amt, ct.cat_desc, i.item_stat
+    		$sql= "SELECT i.item_id, i.item_name,i.item_short_code, p.price_amt, ct.cat_desc, i.item_stat,i.shop_id
 									FROM items i
 									JOIN category ct
 									ON ct.cat_id= i.cat_id
 									JOIN price p
-									ON i.item_id=p.item_id;";
+									ON i.item_id=p.item_id
+									JOIN shop sh
+									ON i.shop_id=sh.shop_id
+									JOIN accounts a
+									ON a.acc_id=sh.acc_id								
+									WHERE a.email='{$_SESSION['email']}'
+									AND a.password='{$_SESSION['password']}';";
 
 				$stmt=mysqli_stmt_init($conn);
 				if (!mysqli_stmt_prepare($stmt,$sql)) {
@@ -183,14 +222,19 @@
 				echo "<tr>";
 				echo "<td>". $value['item_name'] ."</td>";
 				echo "<td>". $value['item_short_code'] ."</td>";
-				echo "<td>P". $value['price_amt'] ."</td>";
+				echo "<td>Php ". number_format($value['price_amt'],2) ."</td>";
 				echo "<td>". $value['cat_desc'] ."</td>";
 				echo "<td>". $value['item_stat'] ."</td>";
 				
-				echo "<td> 	<button type='button' class='btn btn-outline-success' name='edit'> Edit </button></td>";
+
+				echo "<td> 
+						<a href='editItem.php?id=".$value['item_id']."'>
+						<button type='button' class='btn btn-outline-success' name='edit'> Edit </button>
+					</a> 
+					</td>";
 				  echo "<form action='includes/deleteItem.php' method='POST'>";
 				  echo "<input type='hidden' name='item_id' value='". $value['item_id']."'>";
-				echo "<td><button type='submit' class='btn btn-outline-danger' name='delete'> Delete </button></td>";
+				echo "<td><button type='submit' class='btn btn-outline-danger' name='delete2'> Delete </button></td>";
 				echo "</form>";
 				echo "</tr>";
 			    }
