@@ -76,7 +76,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				<div class="info"> 
 					<div class="label">Full Name:</div>
 					<div class="text">
-						<input type="text" name="cn" value="<?php echo $val['acc_cn'];  ?>" placeholder="Full Name" autofocus>
+						<input type="text" name="cn" value="<?php echo $val['acc_cn'];  ?>" placeholder="Full Name" required autofocus>
 					</div>
 				</div>
 			</div>
@@ -88,13 +88,13 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 					<div class="label">Address:</div>
 					<div class="address">
 
-						<input type="text" name="province" value="<?php echo $val['province'];  ?>" placeholder="Province">
+						<input type="text" name="province" value="<?php echo $val['province'];  ?>" placeholder="Province" required>
 						
-						<input type="text" name="city" value="<?php echo $val['city'];  ?>" placeholder="City">
+						<input type="text" name="city" value="<?php echo $val['city'];  ?>" placeholder="City" required>
 						
-						<input type="text" name="brgy" value="<?php echo $val['brgy'];  ?>" placeholder="Baranggay">
+						<input type="text" name="brgy" value="<?php echo $val['brgy'];  ?>" placeholder="Baranggay" required>
 						
-						<input type="text" name="add_details" value="<?php echo $val['add_details'];  ?>" placeholder="Address Details">
+						<input type="text" name="add_details" value="<?php echo $val['add_details'];  ?>" placeholder="Address Details" required>
 					</div>
 				</div>
 			</div>
@@ -105,7 +105,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				<div class="info"> 
 					<div class="label">Phone Number:</div>
 					<div class="text">
-						<input type="text" name="pn" value="<?php echo $val['acc_contact'];  ?>" placeholder="Phone Number">
+						<input type="text" name="pn" value="<?php echo $val['acc_contact'];  ?>" placeholder="Phone Number"  required>
 					</div>
 				</div>
 			</div>
@@ -116,7 +116,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				<div class="info"> 
 					<div class="label">Age:</div>
 					<div class="text">
-						<input type="number" name="age" value="<?php echo $val['acc_age'];  ?>" placeholder="Age">
+						<input type="number" name="age" value="<?php echo $val['acc_age'];  ?>" placeholder="Age"  required>
 					</div>
 				</div>
 			</div>
@@ -127,7 +127,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				<div class="info"> 
 					<div class="label">Gender:</div>
 					<div class="text">
-						 <select class="form-select" name="gender" required="">
+						 <select class="form-select" name="gender" required>
 	                      <option selected><?php echo $val['acc_gender'];  ?></option>
 						  <option value="Male">Male</option>
 						  <option value="Female">Female</option> 
