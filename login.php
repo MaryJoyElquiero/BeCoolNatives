@@ -23,6 +23,9 @@
       case 3:
         echo "<p class='text-danger' align='center'> Connection Failed</p>";
         break;
+      case 4:
+        echo "<p class='text-success' align='center'> Logged Out</p>";
+        break;
       default:
         echo "";
         break;
@@ -54,7 +57,7 @@
                       <form action="includes/login_connect.php" method="POST">
                             <div class="field">
                               <span class="bi bi-envelope"></span>
-                              <input type="text" name="email" required="" placeholder="Email">
+                              <input type="email" name="email" required="" placeholder="Email">
                               
                             </div>
                             <div class="field">
