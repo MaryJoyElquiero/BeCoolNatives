@@ -38,12 +38,12 @@ background-color: #f7f7f7;
 	border-radius: 25px;
 	color: #6697A7;
 	height: 40px;
-	width: 100px;
+	width: 130px;
 	margin-top: 5px;
 }
 .editprofile button:hover{
 		
-	background-color: #6697A7;;	
+	background-color: #6697A7;
 	color: white;
 	font-weight: 500;
 }
@@ -94,6 +94,13 @@ background-color: #f7f7f7;
 }
 .acc-info .editadd{
 	margin-top: 10px;
+}
+.text a{
+	text-decoration: none;
+	color: black;
+}
+.text a:hover{
+	color: #6697A7;
 }
 
 
