@@ -26,6 +26,5 @@ if (isset($_POST['save'])) {
 	header("Location:../shopindex.php");
 	exit();
 }
-
 }
  ?>
