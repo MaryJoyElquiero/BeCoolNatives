@@ -128,7 +128,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 					}
 					if (empty($arr)) {
 						echo "<div class='empty'>";
-						echo "<p> <i class='bi bi-bag-x'></i>  It's Empty Here </p>";
+						echo "<p><i class='bi bi-bag-x'></i> It's Empty Here </p>";
 						echo "</div>";
 					}
 					foreach ($arr as $key => $val) {
@@ -243,6 +243,9 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 <script src="js/custom.js"></script>
 </body>
 </html>
+
+
+
 
 
 
