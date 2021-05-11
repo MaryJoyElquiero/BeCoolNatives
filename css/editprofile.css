@@ -4,11 +4,11 @@ background-color: #f7f7f7;
 .account{
 
 	margin-top: 90px;
-	margin-left: 280px;
 
 }
 
 .acc-info{
+	margin: 0 auto;
 	display: inline-flex;
 	background: white;
 	width: 600px;
@@ -16,13 +16,16 @@ background-color: #f7f7f7;
 	height: 90px;
 }
 .add-info{
+	margin: 0 auto;
 	display: inline-flex;
 	background: white;
 	width: 600px;
 	margin-top: 10px;
-	height: 130px;
+	height: auto;
+	padding-bottom: 15px;
 }
 .header{
+	margin: 0 auto;
 	background: white;
 	width: 600px;
 	margin-top: 10px;
@@ -33,14 +36,13 @@ background-color: #f7f7f7;
 	margin-left: 20px;
 }
 
-
 .icon{
 	font-size: 40px;
 	color: #6697A7;
 	margin-right: 20px;
 	margin-left: 20px;
 }
-.acc-info .info{
+.info{
 	width: 570px;
 	margin-top: 10px;
 }
@@ -60,7 +62,7 @@ background-color: #f7f7f7;
 }
 .text input{
 
-	width: 450px; 
+	width: 90%; 
 	height: 40px;
 	outline: none;
 	border: none;
@@ -68,7 +70,7 @@ background-color: #f7f7f7;
 }
 .text select{
 
-	width: 450px; 
+	width: 90%; 
 	height: 40px;
 	outline: none;
 	border: none;
@@ -91,31 +93,26 @@ background-color: #f7f7f7;
 
 }
 .savebtn{
+	margin: 0 auto;
 	background: white;
 	width: 600px;
-	margin-top: 5px;
-	height: 60px;
+	margin-top: 10px;
+	height: 65px;
 }
 
-.savebtn .info{
-	width: 570px;
-	margin-top: 10px;
-}
 .info button{
 	background-color: #29a3a3;
-	border-radius: 25px;
-	width: 200px;
+	width: 79%;
     border: none;
     color: white;
     font-weight: 500;
     padding: 10px 20px;
     text-align: center;
     font-size: 16px;
-    margin-left: 200px;
+    margin-left: 80px;
 }
 .info button:hover{
-	background-color: #29a3a9;
-	box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+	background-color:#1d8080;
 	
 }
 .text-success{
@@ -137,3 +134,4 @@ background-color: #f7f7f7;
 	margin-top: 10px;
 	text-align: center;
 }
+
