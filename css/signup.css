@@ -3,32 +3,31 @@ body{
 		background-color: #f7f7f7;
 }
 .signup{
-	margin-top: 100px;
-}
-.intro-details{
-	background-color: white;
-	display: inline-flex;
-	margin-top: 10px;
-	margin-left: 200px;
-	margin-right: 200px;
-	box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+	margin: 100px auto;
 }
 
+.intro-details{
+	margin: 10px auto;
+	width: 700pt;
+	height: 450px;
+	background-color: white;
+	box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+	display: flex;
+	
+}
 
 .intro-boxintro{
-	position: relative;
-	display: inline-block;
-	width: 400px;
-	height: 430px;
-	border-radius: 3px;
+	width: 50%;
+	position: relative;	
 	overflow: hidden;
-
+	background-color: #ebfafa;
+	height: 100%;
+	text-align: center;
+	
 
 }
 .intro{
-	align-self: center;
-	margin: 60px;
-	margin-left: 100px;
+		margin: 75pt 55pt;
 }
 
 .welcome{
@@ -55,8 +54,8 @@ body{
 
 	position: relative;
 	display: inline-block;
-	width: 500px;
-	height:400px;
+	width: 50%;
+	height:auto;
 	border-radius: 4px;
 	overflow: hidden;
 
@@ -64,12 +63,10 @@ body{
 
 .content{
 	position: center;
-	width: 400;
-	height: 300;
 	box-sizing: border-box;
 	display: grid;
 	text-align: center;
-	margin-top: 15px;
+	margin-top: 30px;
 }
 
 .content .text{
