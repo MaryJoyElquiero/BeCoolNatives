@@ -8,11 +8,14 @@ if(isset($_POST['save'])){
 	$price_amt=htmlentities($_POST['price_amt']);
 	$cat_desc=htmlentities($_POST['cat_desc']);
 	$item_id=htmlentities($_POST['item_id']);
+	$item_stat=htmlentities($_POST['item_stat']);
 
 	$target = "../items/" .basename($_FILES['item_img']['name']);
 
 	if (empty($item_img)){
-		$sql="UPDATE items i 
+		
+		if (empty($item_stat)) {
+			$sql="UPDATE items i 
 			JOIN price p 
 			ON p.price_id=i.price_id
 			SET i.item_name = '$item_name',
@@ -20,7 +23,21 @@ if(isset($_POST['save'])){
 			 i.cat_id = '$cat_desc',
 			 p.price_amt = '$price_amt'
 			 WHERE i.item_id = '$item_id';";
-	
+		}
+		else{
+
+			$sql="UPDATE items i 
+			JOIN price p 
+			ON p.price_id=i.price_id
+			SET i.item_name = '$item_name',
+			 i.item_short_code = '$item_sc',
+			 i.cat_id = '$cat_desc',
+			 p.price_amt = '$price_amt',
+			 i.item_stat = '$item_stat'
+			 WHERE i.item_id = '$item_id';";
+	}
+
+		
 
 				if (mysqli_query($conn,$sql)) {
 					
@@ -28,10 +45,11 @@ if(isset($_POST['save'])){
 					exit();
 				}
 				else{
-					header("Location:../products?error=8");
+					header("Location:../products.php?error=8");
 					exit();
 				}
 } 
+
 
 	else{
 					
@@ -44,7 +62,8 @@ if(isset($_POST['save'])){
 					i.item_name = '$item_name',
 					 i.item_short_code = '$item_sc',
 					 i.cat_id = '$cat_desc',
-					 p.price_amt = '$price_amt'
+					 p.price_amt = '$price_amt',
+					 i.item_stat='$item_stat'
 					 WHERE i.item_id = '$item_id';";
 	
 								if (mysqli_query($conn,$sql)) {
@@ -53,7 +72,7 @@ if(isset($_POST['save'])){
 									exit();
 								}
 								else{
-									header("Location:../products?error=8");
+									header("Location:../products,php?error=8");
 									exit();
 								}
 				}
