@@ -25,7 +25,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 
 	<?php 
 	include_once "includes/conn.php";
-	$sql="SELECT ac.acc_cn, ac.acc_age, ac.acc_gender, ac.acc_contact, ac.province, ac.city, ac.brgy, ac.add_details 
+	$sql="SELECT ac.acc_cn, ac.acc_age, ac.acc_gender, ac.acc_contact, ac.province, ac.city, ac.brgy, ac.add_details, a.email
 			FROM accinfo ac
 			JOIN accounts a
 			ON ac.acc_id=a.acc_id 
@@ -48,7 +48,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 		foreach ($arr as $key => $val) {
 
 	?>
-
+ 
 
 	
 		<div class="row">	
@@ -60,11 +60,12 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 						 <?php echo $val['acc_cn']; ?>
 						</div>
 
+
 						<div class="editprofile">
-						 <a href="editprofile.php"><button> Edit Profile</button></a>	
-						 
+						 <a href="editprofile.php"><button> Edit Profile</button></a>
+
 						 	<?php  
-				  					$sql="SELECT count('1') FROM shop sh
+				  					$sql="SELECT sh.shop_name FROM shop sh
 									JOIN accounts a
 									ON a.acc_id=sh.acc_id								
 									WHERE a.email='{$_SESSION['email']}'
@@ -73,20 +74,32 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 									$result=mysqli_query($conn,$sql);
 									$row=mysqli_fetch_array($result);
 									
-									if (count($row)==0) {										
-										echo "<a href='shopSetup.php'><button>Be a Seller</button></a>";
+									if (empty($row)) {										
+										echo "<a href='shopSetup.php'><button>Start Selling</button></a>";
 									}
 									else{
-										echo "<a href='shopindex.php'><button>Go to Shop</button></a>";
+										echo "<a href='seller_dashboard.php'><button>".$row['shop_name']. "</button></a>";
 									}
 									
-				  				?>	
+				  				?>
+
+				
 						</div>
 
 
 					</div>
 					
 				</div>
+		</div>
+
+		<div class="row">
+			<div class="acc-info">
+				<div class="icon"><i class="bi bi-gear"></i></div>
+				<div class="info"> 
+					<div class="label">Email & Password</div>
+					<div class="text"><a href="updateEmailPass.php"> Update Email or Password </a></div>
+				</div>
+			</div>
 		</div>
 		<div class="row">
 			<div class="acc-info">
@@ -96,7 +109,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 					<div class="text"> <?php echo $val['province'] ." ," . $val['city'] ." ,". $val['brgy'] ." ,". $val['add_details']; ?></div>
 				</div>
 				<div class="editadd">
-						<button>Edit Address</button>
+					  <a href="updateaddress.php"><button>Edit Address</button></a>
 				</div>
 			</div>
 		</div>
@@ -127,6 +140,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				</div>
 			</div>
 		</div>
+		
 		
 
 </div>
