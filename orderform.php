@@ -22,19 +22,12 @@ session_start();
 	</div>
 
 <?php 
-
-			include_once "includes/conn.php";
+include_once "includes/conn.php";
 
 		if (isset($_GET['id'])) {
 			$item_id=$_GET['id'];
-		}
-		else{
-			header("Location:cart.php");
-			exit;
-		}
 
-			
-							$sql= "SELECT ac.acc_id, aci.acc_cn, c.item_id, i.item_img, i.item_name, p.price_amt, SUM(c.item_qty) as order_qty, SUM(c.total_amt) as order_total, aci.province, aci.city, aci.brgy, aci.add_details
+				$sql= "SELECT ac.acc_id, aci.acc_cn, c.item_id, i.item_img, i.item_name, p.price_amt, SUM(c.item_qty) as order_qty, SUM(c.total_amt) as order_total, aci.province, aci.city, aci.brgy, aci.add_details
 								FROM cart c
 								 JOIN items i
 							 	 ON c.item_id= i.item_id
@@ -48,6 +41,14 @@ session_start();
 							 	 AND ac.email='{$_SESSION['email']}'
 							 	 AND ac.password='{$_SESSION['password']}'
 							 	 GROUP BY i.item_name;";
+		}
+		else{
+			header("Location:cart.php");
+			exit;
+		}
+
+			
+						
 					
 
 					$stmt= mysqli_stmt_init($conn);
