@@ -61,7 +61,7 @@ include "custnav.php";?>
 				<div class="info"> 
 					<div class="label">Province:</div>
 					<div class="text">
-						<input type="text" name="province" value="<?php echo $val['province'];  ?>" placeholder="Province" autofocus>
+						<input type="text" name="province" value="<?php echo $val['province'];  ?>" placeholder="Province"  required autofocus>
 					</div>
 				</div>
 			</div>
@@ -72,7 +72,7 @@ include "custnav.php";?>
 				<div class="info"> 
 					<div class="label">City:</div>
 					<div class="text">
-						<input type="text" name="city" value="<?php echo $val['city'];  ?>" placeholder="City">
+						<input type="text" name="city" value="<?php echo $val['city'];  ?>" placeholder="City" required>
 					</div>
 				</div>
 			</div>
@@ -83,7 +83,7 @@ include "custnav.php";?>
 				<div class="info"> 
 					<div class="label">Barangay:</div>
 					<div class="text">
-						<input type="text" name="brgy" value="<?php echo $val['brgy'];  ?>" placeholder="Barangay">
+						<input type="text" name="brgy" value="<?php echo $val['brgy'];  ?>" placeholder="Barangay" required>
 					</div>
 				</div>
 			</div>
@@ -94,7 +94,7 @@ include "custnav.php";?>
 				<div class="info"> 
 					<div class="label">Address Details</div>
 					<div class="text">
-						<input type="text" name="add_details" value="<?php echo $val['add_details'];  ?>" placeholder="Address Details">
+						<input type="text" name="add_details" value="<?php echo $val['add_details'];  ?>" placeholder="Address Details" required>
 					</div>
 				</div>
 			</div>
@@ -103,8 +103,19 @@ include "custnav.php";?>
 			<div class="savebtn">
 				<div class="info">
 					 <?php if (isset($_GET['id'])) {
-						$item_id=$_GET['id'];
+						$item_id=htmlentities($_GET['id']);
+						echo "<input type='hidden' name='id' value='" .$item_id. "'>";
+					}
+					elseif (isset($_GET['item_id'])&&isset($_GET['item_qty'])&&isset($_GET['total_amt'])&&isset($_GET['price_amt'])) {
+						$item_id=htmlentities($_GET['item_id']);
+						$item_qty=htmlentities($_GET['item_qty']);
+						$price_amt=htmlentities($_GET['price_amt']);
+						$total_amt= $item_qty * $price_amt;
+
 						echo "<input type='hidden' name='item_id' value='" .$item_id. "'>";
+						echo "<input type='hidden' name='item_qty' value='" .$item_qty. "'>";
+						echo "<input type='hidden' name='price_amt' value='" .$price_amt. "'>";
+						echo "<input type='hidden' name='total_amt' value='" .$total_amt. "'>";
 					}
 					?>
 					<input type="hidden" name="acc_id" value="<?php echo $val['acc_id'];  ?>">
