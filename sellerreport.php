@@ -93,15 +93,10 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 						$shop_id = $val['shop_id']; 
 
 
-    		$sql= "SELECT  i.item_name
-                     , i.item_short_code 
-                     , SUM(o.order_total) as order_total
-                     ,SUM(o.order_qty) as order_qty 
-    		           from orders o
-    		           JOIN items i 
-    		           on i.item_id = o.item_id
-    		           WHERE i.shop_id= '$shop_id'
-    		           GROUP by i.item_id";
+    		$sql= "SELECT  item_id, item_name
+                     , item_short_code 
+    		           from items
+    		           WHERE shop_id= '$shop_id';";
    
    
 				$stmt=mysqli_stmt_init($conn);
@@ -133,8 +128,20 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 				echo "<tr>";
 				echo "<td>". $value['item_name'] ."</td>";
 				echo "<td>". $value['item_short_code'] ."</td>";
-				echo "<td>". $value['order_qty'] ."</td>";
-				echo "<td>Php " . number_format($value['order_total'],2) ."</td>";
+
+				$sql= "SELECT COALESCE(SUM(order_qty),0) as order_qty  from orders
+					WHERE item_id = '{$value['item_id']}';";
+
+					$result=mysqli_query($conn,$sql);
+					$row=mysqli_fetch_array($result);
+					echo "<td>". $row[0]."</td>";
+
+				$sql= "SELECT SUM(order_total) as order_total  from orders
+					WHERE item_id = '{$value['item_id']}';";
+
+					$result=mysqli_query($conn,$sql);
+					$row=mysqli_fetch_array($result);
+					echo "<td> Php ". number_format($row[0],2)."</td>";
 				echo "</tr>";
 			    }
 			    echo "<tr>";
