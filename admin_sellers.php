@@ -114,9 +114,11 @@ if (!isset($_SESSION['admin_pass']) || !isset($_SESSION['admin_email'])) {
 
 			    echo "<table class='table' id= 'myTable'>";
 				echo "<thead class='table-light'>";
+				echo "<th>Seller Name</th>";
 				echo "<th>Shop Name</th>";
 				echo "<th>Items Count</th>";
-				echo "<th>Seller Name</th>";
+				echo "<th>Total Orders</th>";
+				echo "<th>Total Sales</th>";
 				echo "</thead>";
 				echo "<br>";
 
@@ -125,16 +127,32 @@ if (!isset($_SESSION['admin_pass']) || !isset($_SESSION['admin_email'])) {
 			    foreach ($arr as $key => $value) {
 			 
 				echo "<tr>";
+				echo "<td>". $value['acc_cn'] ."</td>";
 				echo "<td>". $value['shop_name'] ."</td>";
 
 					$sql= "SELECT count(*)  from items
 					WHERE shop_id = '{$value['shop_id']}';";
 
+
 					$result=mysqli_query($conn,$sql);
 					$row=mysqli_fetch_array($result);
 					echo "<td>". $row[0]."</td>";
 
-				echo "<td>". $value['acc_cn'] ."</td>";
+					$sql= "SELECT COALESCE(SUM(o.order_qty),0), COALESCE(SUM(o.order_total),0) from orders o
+					JOIN items i
+					on i.item_id= o.item_id
+					JOIN shop sh
+					ON sh.shop_id=i.shop_id
+					WHERE sh.shop_id = '{$value['shop_id']}'
+					AND order_status !='Cancelled';";
+
+					$result=mysqli_query($conn,$sql);
+					$row=mysqli_fetch_array($result);
+					echo "<td>". $row[0]."</td>";
+					echo "<td>Php ". number_format($row[1],2)."</td>";
+
+
+				
 			    }
 			    echo "<tr>";
 				echo "<td colspan =100 class='text-center'><em> End of Result  </em></td>";
