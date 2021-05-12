@@ -64,7 +64,8 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 						FROM orders o
 							JOIN items i
 							on o.item_id= i.item_id
-							WHERE i.shop_id='$shop_id';";
+							WHERE i.shop_id='$shop_id'
+							AND o.order_status!='Cancelled';";
 
 							$stmt= mysqli_stmt_init($conn);
 							if(!mysqli_stmt_prepare($stmt,$sql)) {
