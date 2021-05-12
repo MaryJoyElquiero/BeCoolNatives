@@ -259,7 +259,7 @@ else{
 				<p>Cancelled</p>
 				<form action="includes/orderstatus.php" method="POST">
 				<input type="hidden" name="order_id" value="<?php  echo $value['order_id'];?>">
-				<button class="btn btn-outline-danger" name="cancel"> Buy </button>
+				
 				</form>
 			</div>
 		</div>
