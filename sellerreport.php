@@ -129,21 +129,15 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 				echo "<td>". $value['item_name'] ."</td>";
 				echo "<td>". $value['item_short_code'] ."</td>";
 
-				$sql= "SELECT COALESCE(SUM(order_qty),0) as order_qty  from orders
+				$sql= "SELECT COALESCE(SUM(order_qty),0), COALESCE(SUM(order_total),0)  from orders
 					WHERE item_id = '{$value['item_id']}'
 					AND order_status !='Cancelled';";
+					
 
 					$result=mysqli_query($conn,$sql);
 					$row=mysqli_fetch_array($result);
 					echo "<td>". $row[0]."</td>";
-
-				$sql= "SELECT SUM(order_total) as order_total  from orders
-					WHERE item_id = '{$value['item_id']}'
-					AND order_status !='Cancelled';";
-
-					$result=mysqli_query($conn,$sql);
-					$row=mysqli_fetch_array($result);
-					echo "<td> Php ". number_format($row[0],2)."</td>";
+					echo "<td> Php ". number_format($row[1],2)."</td>";
 				echo "</tr>";
 			    }
 			    echo "<tr>";
