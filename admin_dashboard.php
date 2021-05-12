@@ -79,7 +79,8 @@ if (!isset($_SESSION['admin_pass']) || !isset($_SESSION['admin_email'])) {
 			<div class="content">
 			<div class="number">
 				<?php 
-				$sql="SELECT count(*)  FROM items;";
+				$sql="SELECT count(*)  FROM items WHERE item_stat!='Pending'
+									AND item_stat!='Denied';";
 
 					$result=mysqli_query($conn,$sql);
 					$row=mysqli_fetch_array($result);
