@@ -17,14 +17,15 @@ if (isset($_POST['save'])) {
 	$stmt= mysqli_stmt_init($conn);
 
 	if (!mysqli_stmt_prepare($stmt,$sql2)) {
-		header("Location:../shopindex.php?error");
+		header("Location:../shopSetup.php?error");
 		exit();
 	}
 	mysqli_stmt_bind_param($stmt, "ss", $shop_name, $acc_id);
 	mysqli_stmt_execute($stmt);
 
-	header("Location:../shopindex.php");
+	header("Location:../seller_dashboard.php");
 	exit();
 }
+
 }
  ?>
