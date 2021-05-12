@@ -172,7 +172,7 @@ session_start();
 		}
 		if (empty($arr)) {
 			echo "<div class='empty'>";
-						echo "<p> <i class='bi bi-bag-x'></i>  It's Empty Here </p>";
+						echo "<p> <i class='bi bi-bag-x'></i> No items found  </p>";
 						echo "</div>";
 		}
 		foreach ($arr as $key => $val) {
