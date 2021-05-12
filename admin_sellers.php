@@ -94,12 +94,10 @@ if (!isset($_SESSION['admin_pass']) || !isset($_SESSION['admin_email'])) {
     	<div class="col">
 
     		<?php 
-    		$sql= "SELECT sh.shop_name,COUNT(i.item_id) as item_count, ac.acc_cn from items i
-    			JOIN shop sh
-    			ON sh.shop_id=i.shop_id
+    		$sql= "SELECT sh.shop_id, sh.shop_name,ac.acc_cn from shop sh
     			JOIN accinfo ac
     			ON sh.acc_id=ac.acc_id
-    			GROUP BY sh.shop_name;";
+    			GROUP BY sh.shop_id;";
 
 				$stmt=mysqli_stmt_init($conn);
 				if (!mysqli_stmt_prepare($stmt,$sql)) {
@@ -113,7 +111,7 @@ if (!isset($_SESSION['admin_pass']) || !isset($_SESSION['admin_email'])) {
 			    while ($row= mysqli_fetch_assoc($items)){
 			    	array_push($arr, $row);
 			    }
-			   
+
 			    echo "<table class='table' id= 'myTable'>";
 				echo "<thead class='table-light'>";
 				echo "<th>Shop Name</th>";
@@ -128,7 +126,14 @@ if (!isset($_SESSION['admin_pass']) || !isset($_SESSION['admin_email'])) {
 			 
 				echo "<tr>";
 				echo "<td>". $value['shop_name'] ."</td>";
-				echo "<td>". $value['item_count'] ."</td>";
+
+					$sql= "SELECT count(*)  from items
+					WHERE shop_id = '{$value['shop_id']}';";
+
+					$result=mysqli_query($conn,$sql);
+					$row=mysqli_fetch_array($result);
+					echo "<td>". $row[0]."</td>";
+
 				echo "<td>". $value['acc_cn'] ."</td>";
 			    }
 			    echo "<tr>";
