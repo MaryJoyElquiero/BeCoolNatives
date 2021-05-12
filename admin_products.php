@@ -35,7 +35,7 @@ if (!isset($_SESSION['admin_pass']) || !isset($_SESSION['admin_email'])) {
 
 						<div class="col-6">
 				  				<?php  
-				  					$sql="SELECT count('1') FROM items;";
+				  					$sql="SELECT count('1') FROM items WHERE item_stat!='Pending' AND item_stat!='Denied';";
 									$result=mysqli_query($conn,$sql);
 									$row=mysqli_fetch_array($result);
 									echo "<p class='fs-5'>Total:". $row[0]. "</p>";
@@ -105,7 +105,9 @@ if (!isset($_SESSION['admin_pass']) || !isset($_SESSION['admin_email'])) {
 									JOIN shop sh
 									ON i.shop_id=sh.shop_id
 									JOIN accinfo ac
-									ON ac.acc_id=sh.acc_id;";
+									ON ac.acc_id=sh.acc_id
+									WHERE i.item_stat!='Pending'
+									AND i.item_stat!='Denied';";
 
 				$stmt=mysqli_stmt_init($conn);
 				if (!mysqli_stmt_prepare($stmt,$sql)) {
