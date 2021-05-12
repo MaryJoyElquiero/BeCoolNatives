@@ -148,24 +148,26 @@ include "includes/conn.php";
 						if (isset($_GET['search'])) {
 						$searchkey=$_GET['searchkey'];
 
-						$sql="SELECT i.item_img, o.order_date, i.item_name,o.order_qty, ac.acc_cn, o.billing_info,o.item_price,o.order_total, o.order_status
+						$sql="SELECT i.item_img, o.order_date, i.item_name,o.order_qty, ac.acc_cn, o.billing_info,o.item_price,o.order_total, o.order_status, i.shop_id
 						FROM orders o
 						JOIN items i 
 						ON o.item_id= i.item_id
 						JOIN accinfo ac
 						ON o.acc_id=ac.acc_id
 						WHERE o.order_date='$order_date'
+						AND i.shop_id ='$shop_id'
 						AND i.item_name LIKE '$searchkey%';
 						";
 						}
 						else{
-								$sql="SELECT i.item_img, o.order_date, i.item_name,o.order_qty, ac.acc_cn, o.billing_info,o.item_price,o.order_total, o.order_status
+								$sql="SELECT i.item_img, o.order_date, i.item_name,o.order_qty, ac.acc_cn, o.billing_info,o.item_price,o.order_total, o.order_status, i.shop_id
 						FROM orders o
 						JOIN items i 
 						ON o.item_id= i.item_id
 						JOIN accinfo ac
 						ON o.acc_id=ac.acc_id
-						WHERE o.order_date='$order_date';";
+						WHERE o.order_date='$order_date'
+						AND i.shop_id ='$shop_id';";
 						}
 
 
@@ -185,7 +187,7 @@ else{
 }
 							  	$stmt= mysqli_stmt_init($conn);
 								if(!mysqli_stmt_prepare($stmt,$sql)) {
-								header("Location: myorders.php?error= Connection Failed");
+								header("Location: myorders.php?error=Connection Failed");
 								exit();
 
 								}
@@ -257,6 +259,7 @@ else{
 <script src="js/custom.js"></script>
 </body>
 </html>
+
 
 
 
