@@ -260,7 +260,7 @@ else{
 				<p> Recieved </p>
 				<form action="includes/orderstatus.php" method="POST">
 				<input type="hidden" name="order_id" value="<?php  echo $value['order_id'];?>">
-				<button class="btn btn-outline-success" name="buyagain"> Buy Again</button>
+				
 				</form>
 			</div>
 		</div>
