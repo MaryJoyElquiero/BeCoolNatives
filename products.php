@@ -55,7 +55,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 								  	<option selected>Select</option>
 									    <?php 
 
-									    $sql_cat= "SELECT * FROM category WHERE cat_status='A';";
+									    $sql_cat= "SELECT * FROM category WHERE cat_status='Active';";
 									    $result= mysqli_query($conn,$sql_cat);
 									    if (mysqli_num_rows($result)>0) {
 									    	while ($row= mysqli_fetch_assoc($result)) {
