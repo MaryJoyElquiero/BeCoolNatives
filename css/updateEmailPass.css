@@ -3,8 +3,7 @@ background-color: #f7f7f7;
 }
 .account{
 
-	margin-top: 90px;
-	margin-left: 280px;
+	margin: 90px auto;
 
 }
 
@@ -12,7 +11,7 @@ background-color: #f7f7f7;
 	display: inline-flex;
 	background: white;
 	width: 600px;
-	margin-top: 10px;
+	margin: 10px auto;
 	height: auto;
 	padding-bottom: 20px;
 }
@@ -71,7 +70,7 @@ background-color: #f7f7f7;
 	display: inline-flex;
 	background: white;
 	width: 600px;
-	margin-top: 10px;
+	margin: 10px auto;
 	height: auto;
 	padding-bottom: 20px;
 
@@ -120,3 +119,4 @@ background-color: #f7f7f7;
 	background: #bcf7cc;
 	border-radius: 25px;
 	height: 25px;
+
