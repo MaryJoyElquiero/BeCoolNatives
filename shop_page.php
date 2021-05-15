@@ -68,7 +68,7 @@ else{
 			<form action="shop_page.php?shop_id=<?php echo $shop_id; ?>" method="POST">
 			<div class="my-md-1">
 				<div class="input-group">
-					<input class="searchkey" type="text" name="searchkey" placeholder="Naghahanap ako ki...">
+					<input class="searchkey" type="text" name="searchkey" placeholder="Searc Item...">
 					<button class="searchbtn" name="search"><i class="bi bi-search"></i></button>
 				</div>
 			</div>
@@ -85,7 +85,7 @@ else{
 		<?php 
 		include "includes/conn.php";
 
-		$sql= "SELECT * FROM category WHERE cat_status ='A';";
+		$sql= "SELECT * FROM category WHERE cat_status ='Active';";
 
 		$stmt= mysqli_stmt_init($conn);
 		if(!mysqli_stmt_prepare($stmt,$sql)) {
