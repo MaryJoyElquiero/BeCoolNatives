@@ -53,7 +53,7 @@ session_start();
 		<?php 
 		include "includes/conn.php";
 
-		$sql= "SELECT * FROM category WHERE cat_status ='A';";
+		$sql= "SELECT * FROM category WHERE cat_status ='Active';";
 
 		$stmt= mysqli_stmt_init($conn);
 		if(!mysqli_stmt_prepare($stmt,$sql)) {
