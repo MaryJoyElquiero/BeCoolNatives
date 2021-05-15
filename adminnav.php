@@ -32,6 +32,9 @@
 				          <a class="nav-link" href="admin_products.php"><b><i class="bi bi-card-list" style="font-size:26px; font-weight: 600; "></i> Products</a></b>
 				        </li>
 				        <li class="nav-item">
+				          <a class="nav-link" href="categories.php"><b><i class="bi bi-tag" style="font-size:26px; font-weight: 600; "></i> Categories</a></b>
+				        </li>
+				        <li class="nav-item">
 				          <a class="nav-link" href="admin_customers.php"><b><i class="bi bi-people" style="font-size:26px; font-weight: 600; "></i> Customers</a></b>
 				        </li>
 				        <li class="nav-item">
