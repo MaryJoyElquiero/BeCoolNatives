@@ -75,7 +75,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 			<form action="shopview.php" method="GET">
 			<div class="my-md-1">
 				<div class="input-group">
-					<input class="searchkey" type="text" name="searchkey" placeholder="Naghahanap ako ki...">
+					<input class="searchkey" type="text" name="searchkey" placeholder="Search Item">
 					<button class="searchbtn" name="search"><i class="bi bi-search"></i></button>
 				</div>
 			</div>
