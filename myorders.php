@@ -15,23 +15,6 @@ session_start();
 if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 	header("Location:login.php?error=1");
 	exit();
-}<?php
-session_start();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" href="css/bootstrap.min.css"> 
-    <link rel="stylesheet" href="css/myorders.css">
-    <link rel="stylesheet" href="font/bootstrap-icons.css">
-	<title>MYORDERS</title>
-</head>
-<body>
-<?php 
-
-if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
-	header("Location:login.php?error=1");
-	exit();
 }
 
  ?>
@@ -298,6 +281,8 @@ else{
 <script src="js/custom.js"></script>
 </body>
 </html>
+
+
 
 
 
