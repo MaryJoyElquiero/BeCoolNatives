@@ -8,33 +8,32 @@ if (isset($_POST['signupbtn'])) {
 	$confirmpass=htmlentities($_POST['confirmpass']);
 
 	
-
-	if ($password===$confirmpass) {
-		if (strlen($password)<6) {
-			header("Location:../signup.php?error=6");
-			exit();
-	}
-
-		if (uidExists($conn, $email, $password)!==false) {
+		if (emailExists($conn, $email)!==false) {
 			header("Location:../signup.php?error=5");
 			exit();
 		}
+
+		if ($password===$confirmpass) {
+			header("Location:../signup.php?error=2");
+			exit();
+
+		}
+		if (strlen($password)<6) {
+			header("Location:../signup.php?error=6");
+			exit();
+		}
+
 		if (createUser($conn, $email, $password)!==false) {
 			session_start();
 			$_SESSION['password']= $password;
 			$_SESSION['email']= $email;
 
-			header("Location:../profile.php?");
+			header("Location:../profile.php");
 			exit();
 
 		}
 		else{
 		header("Location:../signup.php?error=4");
-		exit();
-	}
-}
-	else{
-		header("Location:../signup.php?error=2");
 		exit();
 	}
 
