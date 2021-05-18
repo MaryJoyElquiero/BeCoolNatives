@@ -12,6 +12,12 @@ if (isset($_POST['save'])) {
 	
 if (isset($_SESSION['email']) || isset($_SESSION['password'])) {
 	include_once "conn.php";
+	
+	
+	if ($age < 13) {
+		header("Location:../profile.php?error=4");
+		exit();
+	}
 
 	$sql= "SELECT id FROM accounts WHERE email='{$_SESSION['email']}' AND password='{$_SESSION['password']}';";
 					$stmt= mysqli_stmt_init($conn);
