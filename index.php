@@ -203,7 +203,7 @@ session_start();
 						<div class="price">Php <?php echo number_format($val['price_amt'],2); ?></div>
 
 						<div class="itemqty">
-							<input type="number" name="item_qty" placeholder="set quantity" required="">
+							<input type="number" name="item_qty" placeholder="set quantity" min="1" pattern="[0-9]" onkeypress="return !(event.charCode == 46)" step="1" required>
 						</div>
 						<div class="actions">
 							<button name="addtocartbtn" type="submit">
