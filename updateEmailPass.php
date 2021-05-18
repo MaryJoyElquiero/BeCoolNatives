@@ -68,8 +68,14 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 			case 5:
 				echo "<p class='text-danger'> Confirm Password Doesn't Match</p>";
 				break;
-				case 6:
+			case 6:
 				echo "<p class='text-success'> Password Changed</p>";
+				break;
+			case 6:
+				echo "<p class='text-success'>New Password is too Short</p>";
+				break;
+			case 7:
+				echo "<p class='text-danger'>Email is Already Taken</p>";
 				break;
 			
 			default:
