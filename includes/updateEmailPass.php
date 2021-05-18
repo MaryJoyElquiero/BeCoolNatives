@@ -15,7 +15,7 @@ if (isset($_POST['updateEmail'])) {
 					$row=mysqli_fetch_array($result);
 
 		if ($row[0]>0) {
-			header("Location:../updateEmailPass.php?error=7");
+			header("Location:../updateEmailPass.php?error=8");
 			exit();
 		}
 
