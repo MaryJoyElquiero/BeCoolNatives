@@ -216,7 +216,7 @@ if (!isset($_SESSION['password']) || !isset($_SESSION['email'])) {
 							echo "</div>";
 							echo "<div class='col-2'><p>Php ".number_format($value['price_amt'],2)."</p></div>";
 							echo "<div class='col-2 qty'>
-								<input type='number' name='order_qty' value='". $value['total_qty']."'>
+								<input type='number' name='order_qty' value='". $value['total_qty']."' min='1' pattern='[0-9]' onkeypress='return !(event.charCode == 46)' step='1' required>
 								<button class='btn btn-outline-success' type='submit' name='confirm'><i class='bi bi-check'></i></button>
 								</div>";			
 							echo "<div class='col-2'><p>Php".number_format($value['total_amt2'],2)."</p></div>";	
