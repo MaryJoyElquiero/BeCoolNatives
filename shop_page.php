@@ -231,7 +231,7 @@ else{
 						?>
 
 						<div class="itemqty">
-							<input type="number" name="item_qty" placeholder="set quantity" required="">
+							<input type="number" name="item_qty" placeholder="set quantity"  min="1" pattern="[0-9]" onkeypress="return !(event.charCode == 46)" step="1" required>
 						</div>
 						<div class="actions">
 							<button name="addtocartbtn" type="submit">
