@@ -71,10 +71,10 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 			case 6:
 				echo "<p class='text-success'> Password Changed</p>";
 				break;
-			case 6:
-				echo "<p class='text-success'>New Password is too Short</p>";
-				break;
 			case 7:
+				echo "<p class='text-danger'>New Password is too Short</p>";
+				break;
+			case 8:
 				echo "<p class='text-danger'>Email is Already Taken</p>";
 				break;
 			
