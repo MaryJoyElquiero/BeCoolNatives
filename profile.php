@@ -21,6 +21,26 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 <div class="container">
 <div class="account">
 	<form action="includes/addprofile.php" method="POST">
+		
+		<?php 
+
+		if (isset($_GET['error'])) {
+		switch ($_GET['error']) {
+			case 1:
+				echo "<p class='text-danger' align='center'>Connection Failed</p>";
+				break;
+			case 2:
+				echo "<p class='text-danger' align='center'>Set Up Profile First</p>";
+				break;
+			case 3:
+				echo "<p class='text-danger' align='center'>Not Saved</p>";
+				break;
+			case 4:
+				echo "<p class='text-danger' align='center'>Age Below 13 is not Allowed</p>";
+				break;
+			}
+		}
+		 ?>
 
 			<div class="row">
 			<div class="header">
