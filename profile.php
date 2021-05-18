@@ -67,7 +67,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				<div class="info"> 
 					<div class="label">Phone Number:</div>
 					<div class="text">
-						<input type="text" name="pn" placeholder="Phone Number" required> 
+						<input type="tel" name="pn"  placeholder="Phone Number" maxlength="11" pattern="09[0-9]{9}" required> 
 					</div>
 				</div>
 			</div>
