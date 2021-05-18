@@ -3,8 +3,21 @@ session_start();
 if (isset($_POST['updateEmail'])) {
 	include_once "conn.php";
 
+
 	$email=htmlentities($_POST['email']);
 	$acc_id=htmlentities($_POST['acc_id']);
+
+	$sql="SELECT count(*)  FROM accounts
+							WHERE email='$email'
+							AND acc_id!='$acc_id';";
+
+					$result=mysqli_query($conn,$sql);
+					$row=mysqli_fetch_array($result);
+
+		if ($row[0]>0) {
+			header("Location:../updateEmailPass.php?error=7");
+			exit();
+		}
 
 	$sql="UPDATE accounts
 			SET email = '$email'	
@@ -59,6 +72,12 @@ if (isset($_POST['updatePass'])) {
 		header("Location:../updateEmailPass.php?error=5");
 		exit();
 	}
+
+	if (strlen($newpass)<6) {
+			header("Location:../updateEmailPass.php?error=7");
+			exit();
+	}
+
 			$sql="UPDATE accounts
 			SET password = '$newpass'	
 			 WHERE acc_id = '$acc_id';";
