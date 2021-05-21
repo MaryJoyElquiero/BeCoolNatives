@@ -13,7 +13,7 @@ if (isset($_POST['signupbtn'])) {
 			exit();
 		}
 
-		if ($password===$confirmpass) {
+		if ($password!==$confirmpass) {
 			header("Location:../signup.php?error=2");
 			exit();
 
