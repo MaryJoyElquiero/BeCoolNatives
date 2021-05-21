@@ -120,8 +120,7 @@ background-color: #f7f7f7;
 	background: #bcf7cc;
 	border-radius: 25px;
 	height: 25px;
-	margin-left: 20px;
-	margin-top: 10px;
+	margin: 10px auto;
 	text-align: center;
 }
 .text-danger{
@@ -129,9 +128,9 @@ background-color: #f7f7f7;
 	background: #F2DEDE;
 	border-radius: 25px;
 	height: 25px;
-	margin-top: 10px;
-	margin-left: 20px;
-	margin-top: 10px;
+	margin: 10px auto;
 	text-align: center;
 }
+
+
 
