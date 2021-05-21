@@ -116,7 +116,7 @@ if (!isset($_SESSION['email']) || !isset($_SESSION['password'])) {
 				<div class="info"> 
 					<div class="label">Age:</div>
 					<div class="text">
-						<input type="number" name="age" value="<?php echo $val['acc_age'];  ?>" placeholder="Age" <input type="number" name="age" value="<?php echo $val['acc_age'];  ?>" placeholder="Age" min="13" pattern="[0-9]" onkeypress="return !(event.charCode == 46)" step="1" required> required>
+						<input type="number" name="age" value="<?php echo $val['acc_age'];  ?>" placeholder="Age" <input type="number" name="age" value="<?php echo $val['acc_age'];  ?>" placeholder="Age" min="13" pattern="[0-9]" onkeypress="return !(event.charCode == 46)" step="1" required>
 					</div>
 				</div>
 			</div>
